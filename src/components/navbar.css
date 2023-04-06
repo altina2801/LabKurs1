@@ -1,0 +1,43 @@
+{/*navbar*/}
+nav{
+    display:flex;
+    align-items: center;
+    justify-content:space-between ;
+    background-color: rgba(0, 0, 0, 0.404);
+    padding:20px 80px;
+    box-shadow: 0 5px 15px grey;
+}
+#navbar{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#navbar li a{
+    list-style: none;
+    padding: 0 20 px;
+    position: relative;
+    padding-left: 100px;
+}
+#navbar li a{
+    text-decoration: none;
+    font-size: 1.3 rem;
+    font-weight:600 ;
+    color:white ;
+    transition: 0.3 s ease-in-out;
+
+}
+#navbar li a:hover
+#navbar li a.active{
+    color: rgb(0, 214, 0);
+}
+#navbar li a:hover::after,
+#navbar li a.active::after{
+    content: "";
+    width: 30%;
+    height: 2px;
+    background-color: rgb(0, 214, 0);
+    position: absolute;
+    bottom:-4px;
+    left: 100px;
+
+}
