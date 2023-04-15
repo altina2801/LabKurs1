@@ -1,0 +1,110 @@
+.about-us-container {
+    display: flex;
+    flex-direction: row;
+    padding-top:50px;
+    
+  }
+  
+  .about-us {
+    flex: 1;
+    margin-right: 20px;
+    padding-left: 90px;
+   
+  }
+  .about-us h1, .about-us p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2rem;
+    color:black(128, 128, 128, 0.432);
+  
+  }
+  
+  .about-us h1 {
+    font-size: 2rem;
+  }
+  
+  .foto1 {
+    flex: 1;
+  }
+  .foto1 img {
+    width: 100%;
+    height: auto;
+    
+  
+  }
+  .learn-more button {
+    background-color:rgba(0, 0, 0, 0.822);
+    border: none;
+    color:antiquewhite;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  
+  /*Pjesa e CEO-se*/
+  .ceo-container {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 0;
+  }
+  
+  .ceo-description {
+    flex-basis: 50%;
+    color:rgba(255, 217, 0, 0.527)(255, 217, 0, 0.527);
+  }
+  
+  .ceo-image {
+    flex-basis: 30%;
+    max-width: 300px;
+  }
+  
+  .ceo-image img {
+    width: 200%;
+    height: auto;
+  }
+  
+  /*TEAM*/
+  .team-member img {
+    height: 200px;
+    width: 200px;
+  
+  }
+  .team-member {
+    flex: 1 1 200px;
+    margin: 20px;
+    text-align: center;
+  }
+  .image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .image-container {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .image-container img {
+    transition: transform 0.3s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .image-container:hover img {
+    transform: scale(1.1);
+  }
+  *{
+    background-color: antiquewhite;
+  }
+  
