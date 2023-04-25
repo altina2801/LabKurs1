@@ -4,7 +4,8 @@ import img102 from '../images/102.png';
 import img103 from '../images/103.png';
 import img104 from '../images/104.png';
 import img105 from '../images/105.png';
-import img106 from '../images/106.png';
+/*import img106 from '../images/106.png';*/
+
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const teamMembers = [
@@ -12,7 +13,7 @@ function Home() {
     { name: 'Emma White', position: ' Licensed Psychologist', image: img103 },
     { name: 'Daniel Brown', position: 'Behavioral Therapist', image: img104 },
     { name: 'Sarah Davis', position: 'Psychiatrist', image: img105 },
-    { name: 'Anna Brown', position: 'Psychiatrist', image: img106 }
+    /*{ name: 'Anna Brown', position: 'Psychiatrist', image: img106 }*/
   ];
   const images = [
     { id: 1, src: require('../images/102.png'), alt: 'Slider Image 1' },
