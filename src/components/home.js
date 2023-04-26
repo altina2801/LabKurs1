@@ -7,7 +7,7 @@ import img105 from '../images/105.png';
 /*import img106 from '../images/106.png';*/
 
 function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0);
+  
   const teamMembers = [
     { name: 'Jane Smith', position: ' Mental Health Counselor', image: img102 },
     { name: 'Emma White', position: ' Licensed Psychologist', image: img103 },
@@ -15,18 +15,8 @@ function Home() {
     { name: 'Sarah Davis', position: 'Psychiatrist', image: img105 },
     /*{ name: 'Anna Brown', position: 'Psychiatrist', image: img106 }*/
   ];
-  const images = [
-    { id: 1, src: require('../images/102.png'), alt: 'Slider Image 1' },
-    { id: 2, src: require('../images/103.png'), alt: 'Slider Image 2' },
-    { id: 3, src: require('../images/104.png'), alt: 'Slider Image 3' },
-    { id: 4, src: require('../images/102.png'), alt: 'Slider Image 4' }
-  ];
-  const nextSlide = () => {
-    setCurrentSlide(currentSlide === images.length - 1 ? 0 : currentSlide + 1);
-  };
-const prevSlide = () => {
-  setCurrentSlide(currentSlide === 0 ? images.length - 1 : currentSlide - 1);
-};
+
+
   
 
   const TeamMember = ({ name, position, image }) => {
@@ -43,7 +33,26 @@ const prevSlide = () => {
       </div>
     );
   };
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const images = [
+    {  src: require('../images/102.png'), alt: 'Slider Image 1' },
+    {  src: require('../images/103.png'), alt: 'Slider Image 2' },
+    {  src: require('../images/104.png'), alt: 'Slider Image 3' },
+    {  src: require('../images/102.png'), alt: 'Slider Image 4' }
+  ];
 
+  const nextSlide = () => {
+    setCurrentSlide(currentSlide === images.length - 1 ? 0 : currentSlide + 1);
+  };
+  
+  const prevSlide = () => {
+    setCurrentSlide(currentSlide === 0 ? images.length - 1 : currentSlide - 1);
+  };
+  
+  const jumpToSlide = (index) => {
+    setCurrentSlide(index);
+  };
+  
 
   return (
     <>
@@ -94,18 +103,26 @@ const prevSlide = () => {
 {/*SLIDER */}
 
 
-    <div className="slider">
-      {images.map((image) => (
-        <img
-          key={image.id}
-          src={image.src}
-          alt={image.alt}
-          className={image.id === currentSlide + 1 ? 'slide active' : 'slide'}
-        />
-      ))}
+<div className="slider">
+{images.map((image, index) => (
+  <img
+    key={index}
+    src={image.src}
+    alt={image.alt}
+    className={index === currentSlide ? 'slide active' : 'slide'}
+  />
+))} 
       <div className="slider-buttons">
-        <button onClick={prevSlide}>Previous</button>
-        <button onClick={nextSlide}>Next</button>
+      {images.map((image, index) => (
+  <button
+    key={image.id}
+    className={index === currentSlide ? 'active' : ''}
+    onClick={() => jumpToSlide(index)}
+  >
+    {/* Replace {index + 1} with an empty string */}
+    {index === currentSlide ? '' : ''}
+  </button>
+))}
       </div>
     </div>
   
