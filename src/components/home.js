@@ -101,9 +101,12 @@ function Home() {
       </div>
 
 {/*SLIDER */}
-
+<div className="textS">
+<h1>what we offer</h1>
+</div>
 
 <div className="slider">
+
 {images.map((image, index) => (
   <img
     key={index}
