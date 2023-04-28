@@ -1,12 +1,5 @@
-import logo from './logo.svg';
-import './App.css';
-function App(){
-  return (
-    <div className='App'>
-      
-    </div>
-  )
-}
+
+import '../css/login.css';
 function Login() {
   return (
     <div className="login-container">
@@ -29,3 +22,4 @@ function Login() {
     </div>
   );
 }
+export default Login;

@@ -1,18 +1,17 @@
-import ImageSlider from './ImageSlider';
-import './AboutUs.css';
+import "../css/aboutus.css";
 import img102 from '../images/102.png';
 import img103 from '../images/103.png';
 import img104 from '../images/104.png';
 import img105 from '../images/105.png';
-import img106 from '../images/106.png';
+/*import img106 from '../images/106.png';*/
 function AboutUs() {
   const teamMembers = [
     { name: 'Jane Smith', position: ' Mental Health Counselor', image: img102 },
     { name: 'Emma White', position: ' Licensed Psychologist', image: img103 },
     { name: 'Daniel Brown', position: 'Behavioral Therapist', image: img104 },
     { name: 'Sarah Davis', position: 'Psychiatrist', image: img105 },
-    { name: 'Anna Brown', position: 'Psychiatrist', image: img106 }
-  ];
+    /*{ name: 'Anna Brown', position: 'Psychiatrist', image: img106 }
+  */];
 
   const TeamMember = ({ name, position, image }) => {
     return (
@@ -90,14 +89,9 @@ function AboutUs() {
 
 {/*SLIDER */}
 
-  <div>
-    <h1><b>what we <i>OFFER</i></b></h1>
-    <div style={containerStyles}> 
-     <ImageSlider slides={slides}/>
-    
-    </div>
 
-  </div>
+
+
  
 
 
