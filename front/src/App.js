@@ -10,6 +10,8 @@ import AboutUs from './components/aboutus';
 import RegisterB from './components/registerB';
 import AddEdit from './components/addEdit';
 import View from './components/view';
+import RegistrationPage from './components/RegistrationPage';
+
 
 function App() {
   return (
@@ -29,6 +31,7 @@ function App() {
           <Route path="/addUser" element={<AddEdit />} />
           <Route path="/update/:id" element={<AddEdit />} />
           <Route path="/view/:id" element={<View />} />
+          <Route path="/registrationpage" element={<RegistrationPage />} />
         </Routes>
         <Footer />
       </Router>

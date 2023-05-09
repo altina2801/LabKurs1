@@ -1,0 +1,74 @@
+.registration-page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(251, 244, 234);
+  }
+  
+  .registration-header {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+    background-color:  rgb(254, 250, 245);
+    color: rgb(116, 152, 116);
+   
+  }
+  .registration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 750px;
+    height: 450px;
+    border: 1px solid rgb(255, 255, 255);
+    padding: 20px;
+    margin: auto;
+    background-color:  rgb(254, 250, 245);
+  }
+
+  .registration-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:  rgb(254, 250, 245);
+  }
+  
+  .therapist-registration-button ,
+  .user-registration-button {
+    width: 180px;
+    height: 180px;
+    margin: 20px;
+    border: none;
+    box-shadow:  0px 5px 5px 2px rgba(142, 142, 142, 0.5);
+    border-radius: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:  antiquewhite;
+    text-decoration: none;
+  }
+ 
+  
+  .therapist-registration-button:hover,
+  .user-registration-button:hover {
+    background-color: #e7e7e7;
+    box-shadow:  0px 5px 5px 2px rgba(142, 142, 142, 0.5);
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .registration-buttons a {
+    text-decoration: none;
+    background-color:  rgb(254, 250, 245);
+  }
+
+  
