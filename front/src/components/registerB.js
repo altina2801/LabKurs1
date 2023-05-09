@@ -1,4 +1,5 @@
 
+
 import React ,{useState,useEffect}from 'react'
 import{Link }from "react-router-dom";
 import "../css/registerB.css";
@@ -15,9 +16,22 @@ const RegisterB = () => {
     useEffect(()=>{
      loadData();
     },[]);
+    const deleteUser = async (id) => {
+        try {
+          if (window.confirm("Are you sure that you want to delete this contact?")) {
+            await axios.delete(`http://localhost:5000/api/remove/${id}`);
+            toast.success("Contact deleted successfully");
+            setTimeout(() => loadData(), 500);
+          }
+        } catch (error) {
+          console.log(error);
+          toast.error("An error occurred while deleting the contact");
+        }
+      };
+      
     return (
         <div style={{marginTop:"150px"}}>
-            <Link to="/addEdit" >
+            <Link to="/addUser" >
             <button className="btn btn-contact" >Add User</button>
             </Link>
             
@@ -44,7 +58,7 @@ const RegisterB = () => {
                                     <Link to={`/update/${item.id}`}>
                                         <button className="btn btn-edit">Edit</button>
                                     </Link>
-                                    <button className="btn btn-delete">Delete</button>
+                                    <button className="btn btn-delete" onClick={()=>deleteUser(item.id)}>Delete</button>
                                     <Link to={`/view/${item.id}`}>
                                         <button className="btn btn-view">View</button>
                                     </Link>

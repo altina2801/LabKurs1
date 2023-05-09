@@ -1,0 +1,42 @@
+.card {
+    background-color: #a3e4d7;
+  }
+  
+  .card-header {
+    background-color: #f7dc6f;
+  }
+  
+  .container {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  strong {
+    display: inline-block;
+    width: 80px;
+    font-weight: bold;
+  }
+  
+  span {
+    margin-left: 10px;
+    display: inline-block;
+  }
+  
+  .btn-edit {
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #f7dc6f;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn-edit:hover {
+    background-color: #a3e4d7;
+  }
+  
