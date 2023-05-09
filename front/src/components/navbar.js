@@ -9,6 +9,11 @@ function Navbar() {
       <div className="navbar-container">
         <h1 className="navbar-heading navbar-item">Tranquillo</h1>
         <ul className="navbar-menu">
+        <li className="navbar-item">
+            <Link to="/" className="navbar-link">
+              <FontAwesomeIcon icon={faHome} /> Home
+            </Link>
+          </li>
           <li className="navbar-item">
             <Link to="/" className="navbar-link">
               <FontAwesomeIcon icon={faSafari} /> Browse
@@ -20,13 +25,8 @@ function Navbar() {
             </Link>
           </li>
           <li className="navbar-item">
-            <Link to="/" className="navbar-link">
-              <FontAwesomeIcon icon={faHome} /> Home
-            </Link>
-          </li>
-          <li className="navbar-item">
-           <Link to="/beforeRegister" className="navbar-link navbar-btn">
-            <FontAwesomeIcon icon={faUser} /> Join in
+           <Link to="/" className="navbar-link navbar-btn">
+            Join in
             </Link>
           </li>
           <li className="navbar-item">
