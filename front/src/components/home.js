@@ -7,6 +7,8 @@ import img105 from '../images/105.png';
 /*import img106 from '../images/106.png';*/
 
 function Home() {
+
+
   
   const teamMembers = [
     { name: 'Jane Smith', position: ' Mental Health Counselor', image: img102 },
@@ -40,7 +42,7 @@ function Home() {
     {  src: require('../images/104.png'), alt: 'Slider Image 3' },
     {  src: require('../images/102.png'), alt: 'Slider Image 4' }
   ];
-
+   
   const nextSlide = () => {
     setCurrentSlide(currentSlide === images.length - 1 ? 0 : currentSlide + 1);
   };
