@@ -12,6 +12,7 @@ import AddEdit from './components/addEdit';
 import View from './components/view';
 import RegistrationPage from './components/RegistrationPage';
 import Quiz from './components/Quiz';
+import Sessions from './components/Sessions';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/view/:id" element={<View />} />
           <Route path="/registrationpage" element={<RegistrationPage />} />
           <Route path="/quiz" element={<Quiz />} />
+          <Route path="/sessions" element={<Sessions />} />
         </Routes>
         <Footer />
       </Router>
