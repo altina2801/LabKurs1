@@ -12,6 +12,7 @@ const db=mysql.createPool({
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
+/* Qikjo eshte krejt pjesa per me i shti te dhenat prej register*/
 //I merr te gjitha the dhenat qe i kena shti ne databaze dhe i qet dashboard
 app.get("/api/get",(req,res)=>{
     const sqlGet="SELECT * FROM contact_db";
@@ -102,6 +103,67 @@ app.post('/api/register', (req, res) => {
       }
     });
   });
+  /*Deri qitu */
+  /*Sessions */
+  //Get all sessions 
+  app.get("/api/sessions", (req, res) => {
+    const sqlGet = "SELECT * FROM session_db";
+    db.query(sqlGet, (error, result) => {
+      if (error) {
+        console.log(error);
+        res.status(500).json({ message: "An error occurred while retrieving sessions." });
+      } else {
+        res.send(result);
+      }
+    });
+  });
+  // Create a new session
+app.post("/api/sessions", (req, res) => {
+  const { session_name, start_time, end_time, location, speaker } = req.body;
+  const sqlInsert =
+    "INSERT INTO session_db (session_name, start_time, end_time, location, speaker) VALUES (?, ?, ?, ?, ?)";
+  db.query(sqlInsert, [session_name, start_time, end_time, location, speaker], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while creating a session." });
+    } else {
+      res.status(200).json({ message: "Session created successfully." });
+    }
+  });
+});
+
+// Delete a session
+app.delete("/api/sessions/:id", (req, res) => {
+  const { id } = req.params;
+  const sqlRemove = "DELETE FROM session_db WHERE id=?";
+  db.query(sqlRemove, id, (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while deleting the session." });
+    } else {
+      res.status(200).json({ message: "Session deleted successfully." });
+    }
+  });
+});
+
+// Update a session
+app.put("/api/sessions/:id", (req, res) => {
+  const { id } = req.params;
+  const { session_name, start_time, end_time, location, speaker } = req.body;
+  const sqlUpdate =
+    "UPDATE session_db SET session_name=?, start_time=?, end_time=?, location=?, speaker=? WHERE id=?";
+  db.query(sqlUpdate, [session_name, start_time, end_time, location, speaker, id], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while updating the session." });
+    } else {
+      res.status(200).json({ message: "Session updated successfully." });
+    }
+  });
+});
+/*Deri qitu */
+
+
 db.getConnection((err,connection)=>{
     if(err){
         console.error("Error connecting to MYSQL server:",err);
