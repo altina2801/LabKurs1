@@ -13,6 +13,7 @@ import View from './components/view';
 import RegistrationPage from './components/RegistrationPage';
 import Quiz from './components/Quiz';
 import Sessions from './components/Sessions';
+import BrowseTherapists from './components/BrowseTherapists';
 
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
       <BrowserRouter>
       <ToastContainer positon ="top-center"/>
       </BrowserRouter>
-      
+
       <Router>
         <Navbar />
         <Routes>
@@ -36,11 +37,10 @@ function App() {
           <Route path="/registrationpage" element={<RegistrationPage />} />
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/sessions" element={<Sessions />} />
+          <Route path="/browsetherapists" element={<BrowseTherapists />} />
         </Routes>
         <Footer />
       </Router>
     </div>
   );
 }
-
-export default App;
