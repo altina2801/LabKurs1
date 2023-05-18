@@ -1,24 +1,25 @@
 .therapists-container {
     width: 65%;
-    margin: 0 auto; /* Center the container horizontally /
-    display: flex;
-    justify-content: flex-end; / Align the container to the right /
+    margin-left: auto; /* Move the container to the right */
+    padding-top: 30px; /* Add padding on top */
+    padding-right: 30px; 
   }
-
+  
   .therapists-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); / Adjust the number of columns as per your design /
-    grid-gap: 20px; / Adjust the gap between cards /
-    padding-top: 20px; / Add padding on top /
+    grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as per your design */
+    grid-gap: 20px; /* Adjust the gap between cards */
+    justify-items: center; /* Align items horizontally to the center */
   }
-
+  
   .therapist-card {
     background-color: #f0f0f0;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); / Add a box shadow */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Add a box shadow */
+    text-align: center; /* Align text within the card to the center */
   }
-
+  
   .therapist-card img {
     width: 100%;
     max-height: 200px;
@@ -26,23 +27,23 @@
     border-radius: 5px;
     margin-bottom: 10px;
   }
-
+  
   .therapist-card h3 {
     margin: 0;
     font-size: 1.2rem;
   }
-
+  
   .therapist-card p {
     margin: 5px 0;
     font-size: 0.9rem;
   }
-
+  
   .therapist-card p:last-child {
     margin-bottom: 15px;
   }
-
+  
   .book-button {
-    background-color: #4caf50;
+    background-color: #79b883;
     color: #fff;
     border: none;
     padding: 8px 16px;
@@ -50,7 +51,44 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-
+  
   .book-button:hover {
-    background-color: #45a049;
+    background-color: #92da95;
+  }
+  .therapists-container {
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  .therapists-container {
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  .therapist-names-container {
+    background-color: #341616;
+    padding: 10px;
+  }
+  
+  .therapist-name {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+   
+  .therapist-names{
+    background-color: #341616;
+  }
+  .profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+  }
+  
+  .profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }

@@ -104,11 +104,25 @@ const BrowseTherapists = () => {
   ];
 
   return (
+    <div className="main-container">
+       {/* Div with a list of therapist names */}
+       <div className="therapist-names">
+        {therapists.map((therapist) => (
+          <div key={therapist.id} className="therapist-name">
+            <div className="profile-picture">
+              <img src={therapist.picture} alt={therapist.name} />
+            </div>
+            <p>{therapist.name}</p>
+          </div>
+        ))}
+      </div>
     <div className="therapists-container">
       <div className="therapists-grid">
         {therapists.map((therapist) => (
           <div key={therapist.id} className="therapist-card">
-            <img src={therapist.picture} alt={therapist.name} />
+            <div className="profile-picture">
+              <img src={therapist.picture} alt={therapist.name} />
+            </div>
             <h3>{therapist.name}</h3>
             <p>{therapist.specialization}</p>
             <p>{therapist.description}</p>
@@ -117,6 +131,9 @@ const BrowseTherapists = () => {
           </div>
         ))}
       </div>
+
+
+    </div>
     </div>
   );
 };
