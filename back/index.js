@@ -105,62 +105,97 @@ app.post('/api/register', (req, res) => {
   });
   /*Deri qitu */
   /*Sessions */
-  //Get all sessions 
-  app.get("/api/sessions", (req, res) => {
-    const sqlGet = "SELECT * FROM session_db";
-    db.query(sqlGet, (error, result) => {
+// Create a session
+app.post("/api/sessions", (req, res) => {
+  const { professional_id, user_id, appointment_id, session_date, session_notes, session_rating } = req.body;
+  const sqlInsert = "INSERT INTO session_db (professional_id, user_id, appointment_id, session_date, session_notes, session_rating) VALUES (?, ?, ?, ?, ?, ?)";
+  db.query(
+    sqlInsert,
+    [professional_id, user_id, appointment_id, session_date, session_notes, session_rating],
+    (error, result) => {
       if (error) {
         console.log(error);
-        res.status(500).json({ message: "An error occurred while retrieving sessions." });
+        res.status(500).json({ message: "An error occurred while creating a session." });
       } else {
-        res.send(result);
+        res.status(201).json({ message: "Session created successfully." });
       }
-    });
-  });
-  // Create a new session
-app.post("/api/sessions", (req, res) => {
-  const { session_name, start_time, end_time, location, speaker } = req.body;
-  const sqlInsert =
-    "INSERT INTO session_db (session_name, start_time, end_time, location, speaker) VALUES (?, ?, ?, ?, ?)";
-  db.query(sqlInsert, [session_name, start_time, end_time, location, speaker], (error, result) => {
+    }
+  );
+});
+
+// Read all sessions
+app.get("/api/sessions", (req, res) => {
+  const sqlSelect = "SELECT * FROM session_db";
+  db.query(sqlSelect, (error, result) => {
     if (error) {
       console.log(error);
-      res.status(500).json({ message: "An error occurred while creating a session." });
+      res.status(500).json({ message: "An error occurred while retrieving sessions." });
     } else {
-      res.status(200).json({ message: "Session created successfully." });
+      res.send(result);
     }
   });
 });
 
+// Read a session by ID
+app.get("/api/sessions/:id", (req, res) => {
+  const session_id = req.params.id;
+  const sqlSelect = "SELECT * FROM session_db WHERE session_id = ?";
+  db.query(sqlSelect, session_id, (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while retrieving the session." });
+    } else {
+      if (result.length === 0) {
+        res.status(404).json({ message: "Session not found." });
+      } else {
+        res.send(result[0]);
+      }
+    }
+  });
+});
+// Edit/Update a session
+app.put("/api/sessions/:id", (req, res) => {
+  const session_id = req.params.id; // Update variable name to session_id
+  const { professional_id, user_id, appointment_id, session_date, session_notes, session_rating } = req.body;
+  const sqlUpdate = "UPDATE session_db SET professional_id = ?, user_id = ?, appointment_id = ?, session_date = ?, session_notes = ?, session_rating = ? WHERE session_id = ?";
+  db.query(
+    sqlUpdate,
+    [professional_id, user_id, appointment_id, session_date, session_notes, session_rating, session_id], // Use session_id variable
+    (error, result) => {
+      if (error) {
+        console.log(error);
+        res.status(500).json({ message: "An error occurred while updating the session." });
+      } else {
+        if (result.affectedRows === 0) {
+          res.status(404).json({ message: "Session not found." });
+        } else {
+          res.status(200).json({ message: "Session updated successfully." });
+        }
+      }
+    }
+  );
+});
+
+
+
 // Delete a session
 app.delete("/api/sessions/:id", (req, res) => {
-  const { id } = req.params;
-  const sqlRemove = "DELETE FROM session_db WHERE id=?";
-  db.query(sqlRemove, id, (error, result) => {
+  const session_id = req.params.id;
+  const sqlDelete = "DELETE FROM session_db WHERE session_id = ?";
+  db.query(sqlDelete, session_id, (error, result) => {
     if (error) {
       console.log(error);
       res.status(500).json({ message: "An error occurred while deleting the session." });
     } else {
-      res.status(200).json({ message: "Session deleted successfully." });
+      if (result.affectedRows === 0) {
+        res.status(404).json({ message: "Session not found." });
+      } else {
+        res.status(200).json({ message: "Session deleted successfully." });
+      }
     }
   });
 });
 
-// Update a session
-app.put("/api/sessions/:id", (req, res) => {
-  const { id } = req.params;
-  const { session_name, start_time, end_time, location, speaker } = req.body;
-  const sqlUpdate =
-    "UPDATE session_db SET session_name=?, start_time=?, end_time=?, location=?, speaker=? WHERE id=?";
-  db.query(sqlUpdate, [session_name, start_time, end_time, location, speaker, id], (error, result) => {
-    if (error) {
-      console.log(error);
-      res.status(500).json({ message: "An error occurred while updating the session." });
-    } else {
-      res.status(200).json({ message: "Session updated successfully." });
-    }
-  });
-});
 /*Deri qitu */
 
 
