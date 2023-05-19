@@ -16,7 +16,9 @@ import Sessions from './components/Sessions';
 import BrowseTherapists from './components/BrowseTherapists';
 import SessionB from './components/SessionB'
 import DropdownList from './components/DropdownList';
-
+import SessionB from './components/SessionB'
+import Professionals from './components/professionals';
+import AddEditTherapist from './components/professionalsAddEdit';
 
 function App() {
   return (
@@ -42,6 +44,10 @@ function App() {
           <Route path="/browsetherapists" element={<BrowseTherapists />} />
           <Route path="/sessionB" element={<SessionB />} />
           <Route path="/dropdownlist" element={<DropdownList />} />
+          <Route path="/sessionB" element={<SessionB />} />
+          <Route path="/professionals" element={<Professionals />} />
+          <Route path="/addTherapist" element={<AddEditTherapist />} />
+          <Route path={`/updateTherapist/:id`} element={<AddEditTherapist />} />
         </Routes>
         <Footer />
       </Router>
