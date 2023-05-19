@@ -258,7 +258,7 @@ app.put("/api/therapists/:professionals_id", (req, res) => {
   const { professionals_id } = req.params;
   const { name, email, password, date_of_birth, gender, resume, certifications } = req.body;
   const sqlUpdate =
-    "UPDATE professionals_db SET name = ?, email = ?, password = ?, date_of_birth = ?, gender = ?, resume = ?, certifications = ? WHERE id = ?";
+    "UPDATE professionals_db SET name = ?, email = ?, password = ?, date_of_birth = ?, gender = ?, resume = ?, certifications = ? WHERE professionals_id = ?";
 
   db.query(
     sqlUpdate,
@@ -274,6 +274,84 @@ app.put("/api/therapists/:professionals_id", (req, res) => {
   );
 });
 
+/*Payment */
+//Create
+app.post("/api/payments", (req, res) => {
+  const { id, professionals_id, amount, payment_date, payment_status } = req.body;
+  const sqlInsert = "INSERT INTO payments_db (id, professionals_id, amount, payment_date, payment_status) VALUES (?, ?, ?, ?, ?)";
+
+  db.query(sqlInsert, [id, professionals_id, amount, payment_date, payment_status], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while adding the payment." });
+    } else {
+      res.status(201).json({ message: "Payment added successfully." });
+    }
+  });
+});
+//Read 
+app.get("/api/payments", (req, res) => {
+  const sqlSelect = "SELECT * FROM payments_db";
+  db.query(sqlSelect, (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while retrieving payments." });
+    } else {
+      res.send(result);
+    }
+  });
+});
+//Update
+app.put("/api/payments/:payment_id", (req, res) => {
+  const { payment_id } = req.params;
+  const { id, professionals_id, amount, payment_date, payment_status } = req.body;
+  const sqlUpdate = "UPDATE payments_db SET id=?, professionals_id=?, amount=?, payment_date=?, payment_status=? WHERE payment_id=?";
+
+  db.query(sqlUpdate, [id, professionals_id, amount, payment_date, payment_status, payment_id], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while updating the payment." });
+    } else {
+      res.status(200).json({ message: "Payment updated successfully." });
+    }
+  });
+});
+
+// Edit Payment
+app.put("/api/payment/edit/:payment_id", (req, res) => {
+  const { payment_id } = req.params;
+  const { id, professionals_id, amount, payment_date, payment_status } = req.body;
+  const sqlUpdate =
+    "UPDATE payments_db SET id=?, professionals_id=?, amount=?, payment_date=?, payment_status=? WHERE payment_id=?";
+
+  db.query(sqlUpdate, [id, professionals_id, amount, payment_date, payment_status, payment_id], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while updating the payment." });
+    } else {
+      res.status(200).json({ message: "Payment updated successfully." });
+    }
+  });
+});
+
+//Delete
+app.delete("/api/payments/:payment_id", (req, res) => {
+  const { payment_id } = req.params;
+  const sqlDelete = "DELETE FROM payments_db WHERE payment_id = ?";
+
+  db.query(sqlDelete, payment_id, (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while deleting the payment." });
+    } else {
+      if (result.affectedRows === 0) {
+        res.status(404).json({ message: "Payment not found." });
+      } else {
+        res.status(200).json({ message: "Payment deleted successfully." });
+      }
+    }
+  });
+});
 
 db.getConnection((err,connection)=>{
     if(err){
