@@ -34,15 +34,23 @@ const SessionB = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submitting form:', updatedSession);
-    const { professional_id, user_id, appointment_id, session_date, session_notes, session_rating } = updatedSession;
-    console.log('Form values:', professional_id, user_id, appointment_id, session_date, session_notes, session_rating);
+    const { session_id, professional_id, user_id, appointment_id, session_date, session_notes, session_rating } = editingSession;
     if (!professional_id || !user_id || !appointment_id || !session_date || !session_notes || !session_rating) {
       toast.error('Please provide a value for each input field');
     } else {
-      updateSession(editingSession.session_id, updatedSession);
+      const updatedData = {
+        professional_id,
+        user_id,
+        appointment_id,
+        session_date,
+        session_notes,
+        session_rating
+      };
+      updateSession(session_id, updatedData);
     }
   };
+  
+  
 
   const deleteSession = async (sessionId) => {
     try {
@@ -66,18 +74,16 @@ const SessionB = () => {
 
   const updateSession = async (sessionId, updatedData) => {
     try {
-      console.log('Updating session:', sessionId, updatedData);
       await axios.put(`http://localhost:5000/api/session/update/${sessionId}`, updatedData);
-
       toast.success('Session updated successfully');
       loadSessions();
       setEditingSession(null); // Reset editing session state
-      setUpdatedSession(null); // Reset updated session state
     } catch (error) {
       console.error(error);
       toast.error('An error occurred while updating the session');
     }
   };
+  
 
   const SessionEdit = ({ session }) => (
     <div>
@@ -97,7 +103,7 @@ const SessionB = () => {
         </div>
         <div>
           <label>Session Date:</label>
-          <input type="text" name="session_date" value={updatedSession?.session_date || ''} onChange={handleInputChange} />
+          <input type="date" name="session_date" value={updatedSession?.session_date || ''} onChange={handleInputChange} />
         </div>
         <div>
           <label>Session Notes:</label>
