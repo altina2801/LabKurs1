@@ -18,7 +18,7 @@ import DropdownList from './components/DropdownList';
 import SessionB from './components/SessionB'
 import Professionals from './components/professionals';
 import AddEditTherapist from './components/professionalsAddEdit';
-
+import Payment from './components/payments';
 function App() {
   return (
     <div className="App">
@@ -46,6 +46,7 @@ function App() {
           <Route path="/addTherapist" element={<AddEditTherapist />} />
           <Route path={`/updateTherapist/:id`} element={<AddEditTherapist />} />
           <Route path="/sessionB" element={<SessionB />} />
+          <Route path="/payment" element={<Payment/>} />
         </Routes>
         <Footer />
       </Router>
