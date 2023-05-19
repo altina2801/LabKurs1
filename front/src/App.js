@@ -14,6 +14,7 @@ import RegistrationPage from './components/RegistrationPage';
 import Quiz from './components/Quiz';
 import Sessions from './components/Sessions';
 import BrowseTherapists from './components/BrowseTherapists';
+import SessionB from './components/SessionB'
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/sessions" element={<Sessions />} />
           <Route path="/browsetherapists" element={<BrowseTherapists />} />
+          <Route path="/sessionB" element={<SessionB />} />
         </Routes>
         <Footer />
       </Router>
