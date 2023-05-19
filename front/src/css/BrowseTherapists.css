@@ -1,15 +1,16 @@
 .therapists-container {
-    width: 65%;
-    margin-left: auto; /* Move the container to the right */
+    width: 75%;
     padding-top: 30px; /* Add padding on top */
     padding-right: 30px; 
+    margin: auto;
   }
   
   .therapists-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Adjust the number of columns as per your design */
+    grid-template-columns: repeat(4, 1fr); /* Adjust the number of columns as per your design */
     grid-gap: 20px; /* Adjust the gap between cards */
     justify-items: center; /* Align items horizontally to the center */
+    padding-top: 30px;
   }
   
   .therapist-card {
@@ -26,20 +27,24 @@
     object-fit: cover;
     border-radius: 5px;
     margin-bottom: 10px;
+    background-color: #f0f0f0;
   }
   
   .therapist-card h3 {
     margin: 0;
     font-size: 1.2rem;
+    background-color: #f0f0f0;
   }
   
   .therapist-card p {
     margin: 5px 0;
     font-size: 0.9rem;
+    background-color: #f0f0f0;
   }
   
   .therapist-card p:last-child {
     margin-bottom: 15px;
+    background-color: #f0f0f0;
   }
   
   .book-button {
@@ -55,13 +60,9 @@
   .book-button:hover {
     background-color: #92da95;
   }
-  .therapists-container {
-    background-color: #f2f2f2;
-    padding: 20px;
-  }
+ 
   
   .therapists-container {
-    background-color: #f2f2f2;
     padding: 20px;
   }
   
@@ -79,16 +80,13 @@
   .therapist-names{
     background-color: #341616;
   }
-  .profile-picture {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 10px;
-  }
-  
+
   .profile-picture img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    background-color: #f0f0f0;
+  }
+  .profile-picture{
+    background-color: #f0f0f0;
   }

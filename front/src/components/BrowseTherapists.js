@@ -8,7 +8,7 @@ const BrowseTherapists = () => {
       id: 1,
       name: 'Therapist 1',
       specialization: 'Specialization 1',
-      picture: 'therapist1.jpg',
+      picture: 'front/src/images/therapist1.webp',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       pricePerHour: 50,
     },
@@ -105,17 +105,7 @@ const BrowseTherapists = () => {
 
   return (
     <div className="main-container">
-       {/* Div with a list of therapist names */}
-       <div className="therapist-names">
-        {therapists.map((therapist) => (
-          <div key={therapist.id} className="therapist-name">
-            <div className="profile-picture">
-              <img src={therapist.picture} alt={therapist.name} />
-            </div>
-            <p>{therapist.name}</p>
-          </div>
-        ))}
-      </div>
+     
     <div className="therapists-container">
       <div className="therapists-grid">
         {therapists.map((therapist) => (

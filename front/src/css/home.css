@@ -46,3 +46,36 @@
 }
 
 
+.second-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.service-icons-row {
+  display: flex;
+  padding: auto;
+}
+
+.service-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px;
+  padding: 3px;
+}
+.plain-white-icon {
+
+  color: rgb(38, 49, 69);
+  border-radius: 50%;
+  padding: 10px;
+  font-size: 40px;
+  width: 43px;
+  height: 43px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.service-description {
+  
+}

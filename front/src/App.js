@@ -12,9 +12,8 @@ import AddEdit from './components/addEdit';
 import View from './components/view';
 import RegistrationPage from './components/RegistrationPage';
 import Quiz from './components/Quiz';
-import Sessions from './components/Sessions';
 import BrowseTherapists from './components/BrowseTherapists';
-import SessionB from './components/SessionB'
+import Sessions from './components/Sessions'
 import DropdownList from './components/DropdownList';
 import SessionB from './components/SessionB'
 import Professionals from './components/professionals';
@@ -42,12 +41,11 @@ function App() {
           <Route path="/quiz" element={<Quiz />} />
           <Route path="/sessions" element={<Sessions />} />
           <Route path="/browsetherapists" element={<BrowseTherapists />} />
-          <Route path="/sessionB" element={<SessionB />} />
           <Route path="/dropdownlist" element={<DropdownList />} />
-          <Route path="/sessionB" element={<SessionB />} />
           <Route path="/professionals" element={<Professionals />} />
           <Route path="/addTherapist" element={<AddEditTherapist />} />
           <Route path={`/updateTherapist/:id`} element={<AddEditTherapist />} />
+          <Route path="/sessionB" element={<SessionB />} />
         </Routes>
         <Footer />
       </Router>
