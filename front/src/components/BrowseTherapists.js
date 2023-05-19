@@ -111,7 +111,7 @@ const BrowseTherapists = () => {
         {therapists.map((therapist) => (
           <div key={therapist.id} className="therapist-card">
             <div className="profile-picture">
-              <img src={therapist.picture} alt={therapist.name} />
+              <img src= {require('../images/therapist1.webp')} alt={therapist.name} />
             </div>
             <h3>{therapist.name}</h3>
             <p>{therapist.specialization}</p>
