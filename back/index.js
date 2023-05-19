@@ -136,51 +136,41 @@ app.get("/api/sessions", (req, res) => {
   });
 });
 
-// Read a session by ID
-app.get("/api/sessions/:id", (req, res) => {
-  const session_id = req.params.id;
-  const sqlSelect = "SELECT * FROM session_db WHERE session_id = ?";
-  db.query(sqlSelect, session_id, (error, result) => {
+// GET endpoint to fetch a session by ID
+app.get("/api/session/edit/:session_id", (req, res) => {
+  const { session_id } = req.params;
+  const sqlGet = "SELECT * FROM session_db WHERE session_id=?";
+  db.query(sqlGet, session_id, (error, result) => {
     if (error) {
       console.log(error);
-      res.status(500).json({ message: "An error occurred while retrieving the session." });
+      res.status(500).send("An error occurred while fetching the session.");
     } else {
-      if (result.length === 0) {
-        res.status(404).json({ message: "Session not found." });
-      } else {
-        res.send(result[0]);
-      }
+      res.send(result);
     }
   });
 });
-// Edit/Update a session
-app.put("/api/sessions/:id", (req, res) => {
-  const session_id = req.params.id; // Update variable name to session_id
+
+// PUT endpoint to update a session by ID
+app.put("/api/session/update/:session_id", (req, res) => {
+  const { session_id } = req.params;
   const { professional_id, user_id, appointment_id, session_date, session_notes, session_rating } = req.body;
-  const sqlUpdate = "UPDATE session_db SET professional_id = ?, user_id = ?, appointment_id = ?, session_date = ?, session_notes = ?, session_rating = ? WHERE session_id = ?";
-  db.query(
-    sqlUpdate,
-    [professional_id, user_id, appointment_id, session_date, session_notes, session_rating, session_id], // Use session_id variable
-    (error, result) => {
-      if (error) {
-        console.log(error);
-        res.status(500).json({ message: "An error occurred while updating the session." });
-      } else {
-        if (result.affectedRows === 0) {
-          res.status(404).json({ message: "Session not found." });
-        } else {
-          res.status(200).json({ message: "Session updated successfully." });
-        }
-      }
+  const sqlUpdate = "UPDATE session_db SET professional_id=?, user_id=?, appointment_id=?, session_date=?, session_notes=?, session_rating=? WHERE session_id=?";
+
+  db.query(sqlUpdate, [professional_id, user_id, appointment_id, session_date, session_notes, session_rating, session_id], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).send("An error occurred while updating the session.");
+    } else {
+      res.send("Session updated successfully.");
     }
-  );
+  });
 });
 
 
 
 // Delete a session
-app.delete("/api/sessions/:id", (req, res) => {
-  const session_id = req.params.id;
+app.delete("/api/delete/sessions/:session_id", (req, res) => {
+  const session_id = req.params.session_id;
   const sqlDelete = "DELETE FROM session_db WHERE session_id = ?";
   db.query(sqlDelete, session_id, (error, result) => {
     if (error) {
@@ -195,6 +185,7 @@ app.delete("/api/sessions/:id", (req, res) => {
     }
   });
 });
+
 
 /*Deri qitu */
 
