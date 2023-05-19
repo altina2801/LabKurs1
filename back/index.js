@@ -188,6 +188,91 @@ app.delete("/api/delete/sessions/:session_id", (req, res) => {
 
 
 /*Deri qitu */
+/*Tash Crud per Therapist*/
+/* Get all therapists */
+app.get("/api/therapists", (req, res) => {
+  const sqlGet = "SELECT * FROM professionals_db WHERE profession_type = 'therapist'";
+
+  db.query(sqlGet, (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while retrieving therapists." });
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+/* Add therapist */
+app.post("/api/therapists", (req, res) => {
+  const { name, email, password, date_of_birth, gender, resume, certifications } = req.body;
+  const sqlInsert =
+    "INSERT INTO professionals_db (name, email, password, date_of_birth, gender, resume, certifications, profession_type) VALUES (?, ?, ?, ?, ?, ?, ?, 'therapist')";
+
+  db.query(
+    sqlInsert,
+    [name, email, password, date_of_birth, gender, resume, certifications],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+        res.status(500).json({ message: "An error occurred while adding the therapist." });
+      } else {
+        res.status(201).json({ message: "Therapist added successfully." });
+      }
+    }
+  );
+});
+
+/* Delete therapist */
+app.delete("/api/therapists/:professionals_id", (req, res) => {
+  const { professionals_id } = req.params;
+  const sqlDelete = "DELETE FROM professionals_db WHERE professionals_id = ?";
+
+  db.query(sqlDelete, professionals_id, (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while deleting the therapist." });
+    } else {
+      res.status(200).json({ message: "Therapist deleted successfully." });
+    }
+  });
+});
+
+/* Get therapist by ID */
+app.get("/api/therapists/:professionals_id", (req, res) => {
+  const { professionals_id } = req.params;
+  const sqlGet = "SELECT * FROM professionals_db WHERE professionals_id = ?";
+
+  db.query(sqlGet, professionals_id, (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while retrieving the therapist." });
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+/* Update therapist */
+app.put("/api/therapists/:professionals_id", (req, res) => {
+  const { professionals_id } = req.params;
+  const { name, email, password, date_of_birth, gender, resume, certifications } = req.body;
+  const sqlUpdate =
+    "UPDATE professionals_db SET name = ?, email = ?, password = ?, date_of_birth = ?, gender = ?, resume = ?, certifications = ? WHERE id = ?";
+
+  db.query(
+    sqlUpdate,
+    [name, email, password, date_of_birth, gender, resume, certifications, professionals_id],
+    (error, result) => {
+      if (error) {
+        console.log(error);
+        res.status(500).json({ message: "An error occurred while updating the therapist." });
+      } else {
+        res.status(200).json({ message: "Therapist updated successfully." });
+      }
+    }
+  );
+});
 
 
 db.getConnection((err,connection)=>{
