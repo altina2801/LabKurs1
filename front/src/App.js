@@ -21,6 +21,7 @@ import AddEditTherapist from './components/professionalsAddEdit';
 import Payment from './components/payments';
 import Profile from './components/profile';
 import TherapistRegister from './components/TherapistRegister';
+import ChatBox from './components/chatbox';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="/payment" element={<Payment/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/therapistregister" element={<TherapistRegister/>} />
+          <Route path="/chatbox" element={<ChatBox/>} />
         </Routes>
         <Footer />
       </Router>
