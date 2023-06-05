@@ -19,6 +19,8 @@ import SessionB from './components/SessionB'
 import Professionals from './components/professionals';
 import AddEditTherapist from './components/professionalsAddEdit';
 import Payment from './components/payments';
+import Profile from './components/profile';
+
 function App() {
   return (
     <div className="App">
@@ -47,6 +49,7 @@ function App() {
           <Route path={`/updateTherapist/:id`} element={<AddEditTherapist />} />
           <Route path="/sessionB" element={<SessionB />} />
           <Route path="/payment" element={<Payment/>} />
+          <Route path="/profile" element={<Profile/>} />
         </Routes>
         <Footer />
       </Router>
