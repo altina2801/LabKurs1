@@ -1,27 +1,130 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../css/profile.css';
 
 const Profile = () => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [profileInfo, setProfileInfo] = useState({
+    name: 'John Doe',
+    therapistType: 'Therapist',
+    specialization: 'Anxiety, Stress Management',
+    location: 'New York City',
+    yearsOfExperience: 10,
+    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae facilisis tellus, sed consectetur urna. Donec id lectus ut odio semper ultrices.',
+    profilePicture: require('../images/therapist1.webp'),
+  });
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleSave = () => {
+    setIsEditing(false);
+    // Save the updated profile information to the server
+    // You can access the updated values from the profileInfo state
+    console.log('Updated profile:', profileInfo);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setProfileInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
+  };
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setProfileInfo((prevInfo) => ({ ...prevInfo, profilePicture: reader.result }));
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="profile-container">
       <div className="profile-header">
         <h1>Profile</h1>
+        {isEditing ? (
+          <button onClick={handleSave}>Save</button>
+        ) : (
+          <button onClick={handleEdit}>Edit</button>
+        )}
       </div>
       <div className="profile-content">
         <div className="profile-picture">
-          <img src= {require('../images/therapist1.webp')} alt="Profile Picture" />
+          <img src={profileInfo.profilePicture} alt="Profile Picture" />
+          {isEditing && (
+            <div>
+              <input type="file" onChange={handleImageUpload} />
+            </div>
+          )}
         </div>
         <div className="profile-details">
-          <h2>John Doe</h2>
-          <p>Therapist</p>
-          <p>Specialization: Anxiety, Stress Management</p>
-          <p>Location: New York City</p>
-          <p>Years of Experience: 10</p>
+          <h2>
+            {isEditing ? (
+              <input
+                type="text"
+                name="name"
+                value={profileInfo.name}
+                onChange={handleInputChange}
+              />
+            ) : (
+              profileInfo.name
+            )}
+          </h2>
+          <p>{profileInfo.therapistType}</p>
+          <p>
+            Specialization:{' '}
+            {isEditing ? (
+              <input
+                type="text"
+                name="specialization"
+                value={profileInfo.specialization}
+                onChange={handleInputChange}
+              />
+            ) : (
+              profileInfo.specialization
+            )}
+          </p>
+          <p>
+            Location:{' '}
+            {isEditing ? (
+              <input
+                type="text"
+                name="location"
+                value={profileInfo.location}
+                onChange={handleInputChange}
+              />
+            ) : (
+              profileInfo.location
+            )}
+          </p>
+          <p>
+            Years of Experience:{' '}
+            {isEditing ? (
+              <input
+                type="number"
+                name="yearsOfExperience"
+                value={profileInfo.yearsOfExperience}
+                onChange={handleInputChange}
+              />
+            ) : (
+              profileInfo.yearsOfExperience
+            )}
+          </p>
           <p>About Me:</p>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
-            vitae facilisis tellus, sed consectetur urna. Donec id lectus ut
-            odio semper ultrices.
+            {isEditing ? (
+              <textarea
+                name="about"
+                value={profileInfo.about}
+                onChange={handleInputChange}
+              />
+            ) : (
+              profileInfo.about
+            )}
           </p>
         </div>
       </div>
