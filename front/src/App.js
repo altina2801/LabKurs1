@@ -20,6 +20,7 @@ import Professionals from './components/professionals';
 import AddEditTherapist from './components/professionalsAddEdit';
 import Payment from './components/payments';
 import Profile from './components/profile';
+import TherapistRegister from './components/TherapistRegister';
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/sessionB" element={<SessionB />} />
           <Route path="/payment" element={<Payment/>} />
           <Route path="/profile" element={<Profile/>} />
+          <Route path="/therapistregister" element={<TherapistRegister/>} />
         </Routes>
         <Footer />
       </Router>
