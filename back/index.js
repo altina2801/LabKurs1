@@ -205,13 +205,13 @@ app.get("/api/therapists", (req, res) => {
 
 /* Add therapist */
 app.post("/api/therapists", (req, res) => {
-  const { name, email, password, date_of_birth, gender, resume, certifications } = req.body;
+  const { name, email, password, date_of_birth, gender, resume, certifications, image } = req.body;
   const sqlInsert =
-    "INSERT INTO professionals_db (name, email, password, date_of_birth, gender, resume, certifications, profession_type) VALUES (?, ?, ?, ?, ?, ?, ?, 'therapist')";
+    "INSERT INTO professionals_db (name, email, password, date_of_birth, gender, resume, certifications, image, profession_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'therapist')";
 
   db.query(
     sqlInsert,
-    [name, email, password, date_of_birth, gender, resume, certifications],
+    [name, email, password, date_of_birth, gender, resume, certifications, image],
     (error, result) => {
       if (error) {
         console.log(error);
@@ -222,6 +222,7 @@ app.post("/api/therapists", (req, res) => {
     }
   );
 });
+
 
 /* Delete therapist */
 app.delete("/api/therapists/:professionals_id", (req, res) => {
@@ -256,13 +257,13 @@ app.get("/api/therapists/:professionals_id", (req, res) => {
 /* Update therapist */
 app.put("/api/therapists/:professionals_id", (req, res) => {
   const { professionals_id } = req.params;
-  const { name, email, password, date_of_birth, gender, resume, certifications } = req.body;
+  const { name, email, password, date_of_birth, gender, resume, certifications, image } = req.body;
   const sqlUpdate =
-    "UPDATE professionals_db SET name = ?, email = ?, password = ?, date_of_birth = ?, gender = ?, resume = ?, certifications = ? WHERE professionals_id = ?";
+    "UPDATE professionals_db SET name = ?, email = ?, password = ?, date_of_birth = ?, gender = ?, resume = ?, certifications = ?, image = ? WHERE professionals_id = ?";
 
   db.query(
     sqlUpdate,
-    [name, email, password, date_of_birth, gender, resume, certifications, professionals_id],
+    [name, email, password, date_of_birth, gender, resume, certifications, image, professionals_id],
     (error, result) => {
       if (error) {
         console.log(error);
@@ -273,6 +274,7 @@ app.put("/api/therapists/:professionals_id", (req, res) => {
     }
   );
 });
+
 
 /*Payment */
 //Create
