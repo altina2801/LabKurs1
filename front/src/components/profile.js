@@ -1,19 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import '../css/profile.css';
 
 const Profile = () => {
+  const { professionals_id } = useParams();
   const [isEditing, setIsEditing] = useState(false);
-  const [profileInfo, setProfileInfo] = useState({
-    name: 'John Doe',
-    therapistType: 'Therapist',
-    specialization: 'Anxiety, Stress Management',
-    location: 'New York City',
-    yearsOfExperience: 10,
-    about: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae facilisis tellus, sed consectetur urna. Donec id lectus ut odio semper ultrices.',
-    profilePicture: require('../images/therapist1.webp'),
-  });
+  const [profileInfo, setProfileInfo] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const specializationOptions = ['Anxiety', 'Stress Management', 'Depression', 'Relationship Issues', 'Self-esteem', 'Trauma'];
+  useEffect(() => {
+    // Fetch the therapist's information from the API using the professionals_id
+    fetch(`/api/therapists/${professionals_id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setProfileInfo(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log('Error fetching therapist:', error);
+        setLoading(false);
+      });
+  }, [professionals_id]);
+
+  const specializationOptions = [
+    'Anxiety',
+    'Stress Management',
+    'Depression',
+    'Relationship Issues',
+    'Self-esteem',
+    'Trauma',
+  ];
+
+  // Render a loading indicator while fetching the therapist's information
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  // Render an error message if the therapist's information couldn't be fetched
+  if (!loading && !profileInfo) {
+    return <div>Error fetching therapist.</div>;
+  }
 
   const handleEdit = () => {
     setIsEditing(true);
@@ -53,7 +79,7 @@ const Profile = () => {
         <div className="profile-picture">
           <img src={profileInfo.profilePicture} alt="Profile Picture" />
           {isEditing && (
-            <div className='profile-picture-upload'>
+            <div className="profile-picture-upload">
               <input type="file" onChange={handleImageUpload} />
             </div>
           )}
@@ -61,12 +87,7 @@ const Profile = () => {
         <div className="profile-details">
           <h2>
             {isEditing ? (
-              <input
-                type="text"
-                name="name"
-                value={profileInfo.name}
-                onChange={handleInputChange}
-              />
+              <input type="text" name="name" value={profileInfo.name} onChange={handleInputChange} />
             ) : (
               profileInfo.name
             )}
@@ -119,11 +140,7 @@ const Profile = () => {
           <p>About Me:</p>
           <p>
             {isEditing ? (
-              <textarea
-                name="about"
-                value={profileInfo.about}
-                onChange={handleInputChange}
-              />
+              <textarea name="about" value={profileInfo.about} onChange={handleInputChange} />
             ) : (
               profileInfo.about
             )}

@@ -1,27 +1,33 @@
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSuitcase, faMugHot } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function RegistrationButtons() {
+  const navigate = useNavigate(); 
+  const handleFreelancerRegistration = () => {
+    navigate('/TherapistRegister');
+  };
+
+  const handleUserRegistration = () => {
+    navigate('/register');
+  };
+
   return (
     <div className="registration-buttons">
-      <Link to="/therapist-registration">
-        <button className="therapist-registration-button">
-          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <FontAwesomeIcon icon={faSuitcase} size="2x" />
-            <span>I’m a freelancer, looking for work</span>
-          </div>
-        </button>
-      </Link>
-      <Link to="/user-registration">
-        <button className="user-registration-button">
+      <button className="therapist-registration-button" onClick={handleFreelancerRegistration}>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <FontAwesomeIcon icon={faMugHot} size="2x" />
-            <span>I’m a user, searching for a therapist</span>
-          </div>
-        </button>
-      </Link>
+          <FontAwesomeIcon icon={faSuitcase} size="2x" />
+          <span>I’m a freelancer, looking for work</span>
+        </div>
+      </button>
+      <button className="user-registration-button" onClick={handleUserRegistration}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <FontAwesomeIcon icon={faMugHot} size="2x" />
+          <span>I’m a user, searching for a therapist</span>
+        </div>
+      </button>
     </div>
   );
 }

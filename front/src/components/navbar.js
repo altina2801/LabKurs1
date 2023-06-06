@@ -25,7 +25,7 @@ function Navbar() {
             </Link>
           </li>
           <li className="navbar-item">
-           <Link to="/" className="navbar-link navbar-btn">
+           <Link to="/RegistrationPage" className="navbar-link navbar-btn">
             Join in
             </Link>
           </li>

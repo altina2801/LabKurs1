@@ -52,6 +52,8 @@ function App() {
           <Route path="/profile/:professionals_id" element={<Profile />} />
           <Route path="/therapistregister" element={<TherapistRegister />} />
           <Route path="/chatbox" element={<ChatBox />} />
+          
+          
         </Routes>
         <Footer />
       </Router>
