@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../css/BrowseTherapists.css';
 
+import { Link } from 'react-router-dom';
 const BrowseTherapists = () => {
   const [therapists, setTherapists] = useState([]);
 
@@ -24,7 +25,9 @@ const BrowseTherapists = () => {
               <p>{therapist.profession_type}</p>
               <p>{therapist.resume}</p>
               <p>Price per hour: ${therapist.pricePerHour}</p>
-              <button className="book-button">Book</button>
+              <Link to={`/profile/${therapist.professionals_id}`}>
+  <button className="book-button">Book</button>
+</Link>
             </div>
           ))}
         </div>
