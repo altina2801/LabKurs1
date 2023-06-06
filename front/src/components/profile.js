@@ -43,20 +43,15 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-container">
+    <div className={`profile-container ${isEditing ? 'editing' : ''}`}>
       <div className="profile-header">
         <h1>Profile</h1>
-        {isEditing ? (
-          <button onClick={handleSave}>Save</button>
-        ) : (
-          <button onClick={handleEdit}>Edit</button>
-        )}
       </div>
       <div className="profile-content">
         <div className="profile-picture">
           <img src={profileInfo.profilePicture} alt="Profile Picture" />
           {isEditing && (
-            <div>
+            <div className='profile-picture-upload'>
               <input type="file" onChange={handleImageUpload} />
             </div>
           )}
@@ -126,6 +121,13 @@ const Profile = () => {
               profileInfo.about
             )}
           </p>
+          <div className="edit-button">
+            {isEditing ? (
+              <button onClick={handleSave}>Save</button>
+            ) : (
+              <button onClick={handleEdit}>Edit</button>
+            )}
+          </div>
         </div>
       </div>
     </div>

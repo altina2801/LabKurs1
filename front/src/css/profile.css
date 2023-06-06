@@ -1,44 +1,140 @@
 .profile-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    
-  }
-  
-  .profile-header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .profile-content {
-    display: flex;
-    align-items: center;
-  }
-  
-  .profile-picture {
-    flex: 0 0 200px;
-    margin-right: 20px;
-  }
-  
-  .profile-picture img {
-    width: 100%;
-    border-radius: 50%;
-  }
-  
-  .profile-details {
-    flex: 1;
-  }
-  
-  .profile-details h2 {
-    font-size: 24px;
-    margin-bottom: 5px;
-  }
-  
-  .profile-details p {
-    margin-bottom: 5px;
-  }
-  
-  .profile-details p:last-child {
-    margin-bottom: 0;
-  }
-  
+  max-width: 600px;
+  margin-top: 10px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  height: 500px;
+  position: relative;
+  border-radius: 5px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: white;
+}
+
+.profile-header h1 {
+  background-color: white;
+}
+
+.profile-content {
+  display: flex;
+  align-items: center;
+  background-color: white;
+ 
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.profile-picture {
+  flex: 0 0 200px;
+  margin-right: 20px;
+  background-color: white;
+}
+
+.profile-picture img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.profile-details {
+  flex: 1;
+  background-color: white;
+}
+
+.profile-details h2 {
+  font-size: 24px;
+  margin-bottom: 5px;
+  background-color: white;
+}
+
+.profile-details p {
+  background-color: white;
+  margin-bottom: 5px;
+}
+
+.profile-details p:last-child {
+  margin-bottom: 0;
+}
+
+.edit-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.profile-container.editing {
+  /* Styles when profile is being edited */
+  width: 800px;
+  height: 600px;
+}
+
+
+
+.edit-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.edit-button button {
+  /* Styles for the edit button */
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Additional styles for the profile container */
+.profile-container.editing .profile-details h2 input,
+.profile-container.editing .profile-details p input,
+.profile-container.editing .profile-details textarea {
+  /* Styles for input fields when editing */
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  padding: 5px;
+  font-size: 16px;
+}
+.profile-container.editing .profile-details textarea {
+  height: 50px;
+  width: 300px;
+}
+
+.profile-container.editing .profile-picture {
+  /* Styles for profile picture when editing */
+  border: 2px solid #d1d1d1;
+  background-color: white;
+
+}
+
+.profile-container.editing .edit-button button {
+  /* Styles for the edit button when editing */
+  background-color: #28a745;
+}
+.profile-container .profile-picture input[type="file"] {
+  width: 180px;
+  height: 30px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px;
+  font-size: 14px;
+  color: #555;
+  outline: none;
+}
+
+.profile-container .profile-picture input[type="file"]:hover {
+  border-color: #888;
+}
+
+.profile-container .profile-picture input[type="file"]:focus {
+  border-color: #555;
+}
+.profile-picture-upload {
+  background-color: white;
+  padding: 10px;
+}
