@@ -13,6 +13,8 @@ const Profile = () => {
     profilePicture: require('../images/therapist1.webp'),
   });
 
+  const specializationOptions = ['Anxiety', 'Stress Management', 'Depression', 'Relationship Issues', 'Self-esteem', 'Trauma'];
+
   const handleEdit = () => {
     setIsEditing(true);
   };
@@ -73,12 +75,17 @@ const Profile = () => {
           <p>
             Specialization:{' '}
             {isEditing ? (
-              <input
-                type="text"
+              <select
                 name="specialization"
                 value={profileInfo.specialization}
                 onChange={handleInputChange}
-              />
+              >
+                {specializationOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
             ) : (
               profileInfo.specialization
             )}

@@ -7,6 +7,7 @@
   height: 500px;
   position: relative;
   border-radius: 5px;
+  font-family: Arial, sans-serif;
 }
 
 .profile-header {
@@ -17,13 +18,14 @@
 
 .profile-header h1 {
   background-color: white;
+  color: #333;
+  font-size: 28px;
 }
 
 .profile-content {
   display: flex;
   align-items: center;
   background-color: white;
- 
   border-radius: 5px;
   padding: 10px;
 }
@@ -48,11 +50,13 @@
   font-size: 24px;
   margin-bottom: 5px;
   background-color: white;
+  color: #333;
 }
 
 .profile-details p {
   background-color: white;
   margin-bottom: 5px;
+  color: #555;
 }
 
 .profile-details p:last-child {
@@ -71,22 +75,15 @@
   height: 600px;
 }
 
-
-
-.edit-button {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-}
-
 .edit-button button {
   /* Styles for the edit button */
-  background-color: #007bff;
+  background-color: #49a1ff;
   color: #fff;
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 /* Additional styles for the profile container */
@@ -98,7 +95,9 @@
   border: 1px solid #ddd;
   padding: 5px;
   font-size: 16px;
+  color: #555;
 }
+
 .profile-container.editing .profile-details textarea {
   height: 50px;
   width: 300px;
@@ -108,13 +107,13 @@
   /* Styles for profile picture when editing */
   border: 2px solid #d1d1d1;
   background-color: white;
-
 }
 
 .profile-container.editing .edit-button button {
   /* Styles for the edit button when editing */
-  background-color: #28a745;
+  background-color: #4daa63;
 }
+
 .profile-container .profile-picture input[type="file"] {
   width: 180px;
   height: 30px;
@@ -134,7 +133,38 @@
 .profile-container .profile-picture input[type="file"]:focus {
   border-color: #555;
 }
+
 .profile-picture-upload {
   background-color: white;
   padding: 10px;
+}
+
+.profile-details select {
+  width: 100%;
+  border: none;
+  background-color: white;
+  font-size: 16px;
+  color: #555;
+  outline: none;
+}
+
+.profile-container.editing .profile-details select {
+  /* Styles for select input when editing */
+  background-color: #f7f7f7;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+.profile-container.editing .profile-details select:hover {
+  border-color: #888;
+}
+
+.profile-container.editing .profile-details select:focus {
+  border-color: #555;
+}
+
+.profile-details select option {
+  background-color: white;
+  color: #555;
+  font-weight: normal;
 }
