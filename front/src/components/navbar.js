@@ -15,7 +15,7 @@ function Navbar() {
             </Link>
           </li>
           <li className="navbar-item">
-            <Link to="/" className="navbar-link">
+            <Link to="/BrowseTherapists" className="navbar-link">
               <FontAwesomeIcon icon={faSafari} /> Browse
             </Link>
           </li>
@@ -30,7 +30,7 @@ function Navbar() {
             </Link>
           </li>
           <li className="navbar-item">
-            <Link to="/login.js" className="navbar-link navbar-btn">
+            <Link to="/login" className="navbar-link navbar-btn">
          <FontAwesomeIcon icon={faUser} /> Log in
           </Link>
           </li>
