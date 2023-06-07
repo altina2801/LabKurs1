@@ -15,7 +15,7 @@ function Register() {
     try {
       const response = await axios.post('http://localhost:5000/api/register', data);
       console.log(response.data); // log the response data for debugging
-      navigate('/registerB');
+      navigate('/userProfile');
     } catch (error) {
       console.error(error); // log any errors for debugging
       toast.error('Failed to register. Please try again.');

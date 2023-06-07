@@ -68,41 +68,46 @@ app.delete("/api/remove/:id", (req, res) => {
     })
 })
 //Update
-app.put("/api/update/:id",(req,res)=>{
-    const{id}=req.params;
-    const{name,email,password}=req.body;
-    const sqlUpdate="UPDATE contact_db SET name=?,email=?,password=? WHERE id=?";
-    db.query(sqlUpdate,[name,email,password,id],(error,result)=>{
-        if(error){
-            console.log(error);
-        }
-     res.send(result);
-    })
-})
+app.put("/api/update/:id", (req, res) => {
+  const { id } = req.params;
+  const { name, email, password, date_of_birth, phone_number, address } = req.body;
+  const sqlUpdate = "UPDATE contact_db SET name=?, email=?, password=?, date_of_birth=?, phone_number=?, address=? WHERE id=?";
+  
+  db.query(sqlUpdate, [name, email, password, date_of_birth, phone_number, address, id], (error, result) => {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: "An error occurred while updating the user profile." });
+    } else {
+      res.status(200).json({ message: "User profile updated successfully." });
+    }
+  });
+});
+
 /*Me i insert te dhenat ne db prej register*/
 app.post('/api/register', (req, res) => {
-    const { name, email, password } = req.body;
-  
-    db.getConnection((err, connection) => {
-      if (err) {
-        console.log(err);
-        res.status(500).json({ message: 'Failed to register user' });
-      } else {
-        const sql = `INSERT INTO contact_db (name, email, password) VALUES ('${name}', '${email}', '${password}')`;
-  
-        connection.query(sql, (err, result) => {
-          connection.release(); 
-          if (err) {
-            console.log(err);
-            res.status(500).json({ message: 'Failed to register user' });
-          } else {
-            console.log(result);
-            res.status(200).json({ message: 'User registered successfully' });
-          }
-        });
-      }
-    });
+  const { name, email, password } = req.body;
+
+  db.getConnection((err, connection) => {
+    if (err) {
+      console.log(err);
+      res.status(500).json({ message: 'Failed to register user' });
+    } else {
+      const sql = `INSERT INTO contact_db (name, email, password) VALUES (?, ?, ?)`;
+      const values = [name, email, password];
+
+      connection.query(sql, values, (err, result) => {
+        connection.release(); 
+        if (err) {
+          console.log(err);
+          res.status(500).json({ message: 'Failed to register user' });
+        } else {
+          console.log(result);
+          res.status(200).json({ message: 'User registered successfully' });
+        }
+      });
+    }
   });
+});
   /*Deri qitu */
   /*Sessions */
 // Create a session

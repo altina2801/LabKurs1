@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import "../css/profile.css";
 
 const Profile = () => {
   const { professionals_id } = useParams();
@@ -24,13 +25,13 @@ const Profile = () => {
   }
 
   return (
-    <div>
-      <h2>{therapist.name}'s Profile</h2>
-      <p>Email: {therapist.email}</p>
-      <p>Date of Birth: {therapist.date_of_birth}</p>
-      <p>Gender: {therapist.gender}</p>
-      <p>Resume: {therapist.resume}</p>
-      <p>Certifications: {therapist.certifications}</p>
+    <div className="profile-container">
+      <h2 className="profile-heading">{therapist.name}'s Profile</h2>
+      <p className="profile-info">Email: {therapist.email}</p>
+      <p className="profile-info">Date of Birth: {therapist.date_of_birth}</p>
+      <p className="profile-info">Gender: {therapist.gender}</p>
+      <p className="profile-info">Resume: {therapist.resume}</p>
+      <p className="profile-info">Certifications: {therapist.certifications}</p>
       {/* Render additional information as needed */}
     </div>
   );

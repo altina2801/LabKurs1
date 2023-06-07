@@ -23,6 +23,7 @@ import Payment from './components/payments';
 import Profile from './components/profile';
 import TherapistRegister from './components/TherapistRegister';
 import ChatBox from './components/chatbox';
+import UserProfile from './components/userProfile';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="/profile/:professionals_id" element={<Profile />} />
           <Route path="/therapistregister" element={<TherapistRegister />} />
           <Route path="/chatbox" element={<ChatBox />} />
+          <Route path="/userProfile" element={<UserProfile />} />
           
           
         </Routes>
