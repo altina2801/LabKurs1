@@ -1,121 +1,68 @@
-import React, { useState } from 'react';
-import '../css/TherapistRegister.css';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const TherapistRegister = () => {
-  const [formValues, setFormValues] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    cvFile: null,
-    specializations: '',
-    skills: '',
-  });
+  const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues((prevValues) => ({ ...prevValues, [name]: value }));
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormValues((prevValues) => ({ ...prevValues, cvFile: file }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log(formValues);
-    // Reset form values
-    setFormValues({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      cvFile: null,
-      specializations: '',
-      skills: '',
-    });
+
+    const formData = {
+      name,
+      email,
+      password,
+    };
+
+    try {
+      const response = await axios.post('/api/therapists', formData);
+      console.log(response.data); // log the response data for debugging
+      toast.success('Therapist registered successfully.');
+      navigate('/'); // Navigate to a different route upon successful registration
+    } catch (error) {
+      console.error(error); // log any errors for debugging
+      toast.error('Failed to register therapist. Please try again.');
+    }
   };
 
   return (
-    <div className="register-form-container">
-      <h1>Therapist Registration</h1>
+    <div className="register-container">
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
+        <h2 className="the-register-name">Register</h2>
+        <div className="input-field">
+          <i className="fa fa-user"></i>
           <input
             type="text"
-            name="firstName"
-            placeholder="First Name"
-            value={formValues.firstName}
-            onChange={handleChange}
-            required
-          />
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            value={formValues.lastName}
-            onChange={handleChange}
+            placeholder="First and last name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </div>
-        <div className="form-group">
+        <div className="input-field">
+          <i className="fa fa-lock"></i>
           <input
             type="email"
-            name="email"
             placeholder="Email"
-            value={formValues.email}
-            onChange={handleChange}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
-        <div className="form-group">
+        <div className="input-field">
+          <i className="fa fa-lock"></i>
           <input
             type="password"
-            name="password"
             placeholder="Password"
-            value={formValues.password}
-            onChange={handleChange}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            value={formValues.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="file"
-            name="cvFile"
-            onChange={handleFileChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            name="specializations"
-            placeholder="Specializations"
-            value={formValues.specializations}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <textarea
-            name="skills"
-            placeholder="Skills"
-            value={formValues.skills}
-            onChange={handleChange}
-            required
-          ></textarea>
         </div>
         <button type="submit">Register</button>
       </form>
