@@ -80,7 +80,7 @@ const TherapistRegister = () => {
         {/* Add input fields for the remaining attributes */}
         <div className="input-field">
           <i className="fa fa-calendar"></i>
-          <input type="date" placeholder="Date of Birth" name="dateOfBirth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required />
+          <input type="date" placeholder="Date of Birth" name="date_of_birth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required />
         </div>
         <div className="input-field">
           <i className="fa fa-venus-mars"></i>
@@ -101,7 +101,7 @@ const TherapistRegister = () => {
         </div>
         <div className="input-field">
           <i className="fa fa-users"></i>
-          <select name="professionType" value={professionType} onChange={(e) => setProfessionType(e.target.value)} required>
+          <select name="profession_type" value={professionType} onChange={(e) => setProfessionType(e.target.value)} required>
             <option value="">Select Profession Type</option>
             <option value="therapist">Therapist</option>
             <option value="psychologist">Psychologist</option>
