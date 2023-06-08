@@ -1,6 +1,9 @@
 const express=require("express");
 const app=express();
 const mysql=require("mysql");
+const socketIO = require('socket.io');
+const io = socketIO(server);
+const server = http.createServer(app);
 const bodyParser=require("body-parser");
 const cors=require("cors");
 const db=mysql.createPool({
@@ -30,6 +33,7 @@ app.get("/",(req,res)=>{
     // })
     
 });
+
 /*Add User */
 app.post("/api/post",(req,res)=>{
     const{name,email,password}=req.body;

@@ -1,55 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import '../css/chatbox.css';
+import React, { useEffect, useRef, useState } from 'react';
+import io from 'socket.io-client';
+import MessageList from './MessageList';
+import MessageForm from './MessageForm';
+import "../css/Chatbox.css";
 
-const ChatBox = () => {
+const Chatbox = () => {
   const [messages, setMessages] = useState([]);
-  const [inputMessage, setInputMessage] = useState('');
+  const socketRef = useRef(null);
 
   useEffect(() => {
-    // Fetch initial messages from the server
-    fetchMessages();
+    // Connect to the server using socket.io
+    socketRef.current = io('http://localhost:5000');
+
+    // Listen for incoming messages
+    socketRef.current.on('message', (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+
+    // Clean up the socket connection when the component unmounts
+    return () => {
+      socketRef.current.disconnect();
+    };
   }, []);
 
-  const fetchMessages = async () => {
-    try {
-      const response = await axios.get('/api/messages'); // Replace with your server API endpoint
-      setMessages(response.data);
-    } catch (error) {
-      console.error('Error fetching messages:', error);
-    }
-  };
+  const handleSendMessage = (text) => {
+    const message = {
+      text,
+      timestamp: new Date().getTime(),
+      sender: 'user', // Add a sender property to identify the sender of the message
+    };
 
-  const sendMessage = async () => {
-    try {
-      const response = await axios.post('/api/messages', { message: inputMessage }); // Replace with your server API endpoint
-      setMessages([...messages, response.data]);
-      setInputMessage('');
-    } catch (error) {
-      console.error('Error sending message:', error);
-    }
+    // Send the message to the server
+    socketRef.current.emit('message', message);
+
+    // Update the messages state immediately to show the sent message
+    setMessages((prevMessages) => [...prevMessages, message]);
   };
 
   return (
     <div className="chatbox-container">
       <div className="chatbox-messages">
-        {messages.map((message) => (
-          <div className="message" key={message.id}>
-            <span className="username">{message.username}:</span> {message.text}
-          </div>
-        ))}
+        <MessageList messages={messages} />
       </div>
-      <div className="chatbox-input">
-        <input
-          type="text"
-          placeholder="Type your message"
-          value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
-        />
-        <button onClick={sendMessage}>Send</button>
+      <div className="chatbox-form">
+        <MessageForm onSendMessage={handleSendMessage} />
       </div>
     </div>
   );
 };
 
-export default ChatBox;
+export default Chatbox;

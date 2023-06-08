@@ -81,6 +81,10 @@ const TherapistRegister = () => {
           </div>
         </div>
         <div className="input-row">
+        <div className="input-field">
+            <i className="fa fa-lock"></i>
+            <input type="password" placeholder="Confirm Password" name="confirm_password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+          </div>
           <div className="input-field">
             <i className="fa fa-calendar"></i>
             <input type="date" placeholder="Date of Birth" name="date_of_birth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required />
@@ -114,16 +118,9 @@ const TherapistRegister = () => {
               <option value="psychologist">Psychologist</option>
             </select>
           </div>
-          <div className="input-field">
-            <i className="fa fa-image"></i>
-            <input type="file" accept="image/*" name="image" onChange={handleImageChange} required />
-          </div>
+        
         </div>
         <div className="input-row">
-          <div className="input-field">
-            <i className="fa fa-lock"></i>
-            <input type="password" placeholder="Confirm Password" name="confirm_password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-          </div>
           <div className="input-field">
             <i className="fa fa-check"></i>
             <input type="text" placeholder="Skills" name="skills" value={skills} onChange={(e) => setSkills(e.target.value)} required />
@@ -135,8 +132,11 @@ const TherapistRegister = () => {
             <input type="text" placeholder="Specializations" name="specializations" value={specializations} onChange={(e) => setSpecializations(e.target.value)} required />
           </div>
           <div className="input-field">
-            <i className="fa fa-file"></i>
-            <input type="text" placeholder="CV" name="cv" value={cv} onChange={(e) => setCV(e.target.value)} required />
+          <div className="input-field">
+            <i className="fa fa-image"></i>
+            <input type="file" accept="image/*" name="image" onChange={handleImageChange} required />
+          </div>
+          
           </div>
         </div>
         <div className="input-row">
@@ -144,10 +144,7 @@ const TherapistRegister = () => {
             <i className="fa fa-info-circle"></i>
             <textarea placeholder="About" name="about" value={about} onChange={(e) => setAbout(e.target.value)} required></textarea>
           </div>
-          <div className="input-field">
-            <i className="fa fa-info-circle"></i>
-            <textarea placeholder="Description" name="description" value={description} onChange={(e) => setDescription(e.target.value)} required></textarea>
-          </div>
+         
         </div>
         <button type="submit">Register</button>
       </form>

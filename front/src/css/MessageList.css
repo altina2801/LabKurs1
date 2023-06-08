@@ -1,0 +1,30 @@
+.message-list-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .message {
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+  
+  .user {
+    background-color: #e6f2ff;
+    align-self: flex-start;
+  }
+  
+  .therapist {
+    background-color: #fff;
+    align-self: flex-end;
+    border: 1px solid #ccc;
+    align-items: flex-end; /* Add this line */
+  }
+  
+  .message-text {
+    margin: 0;
+  }
+  
