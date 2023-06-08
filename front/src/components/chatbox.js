@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import MessageList from './MessageList';
 import MessageForm from './MessageForm';
-import "../css/Chatbox.css";
+import '../css/Chatbox.css';
 
 const Chatbox = () => {
   const [messages, setMessages] = useState([]);
@@ -27,7 +27,6 @@ const Chatbox = () => {
     const message = {
       text,
       timestamp: new Date().getTime(),
-      sender: 'user', // Add a sender property to identify the sender of the message
     };
 
     // Send the message to the server

@@ -1,6 +1,7 @@
 .message-list-container {
     display: flex;
     flex-direction: column;
+    background-color: white;
   }
   
   .message {
@@ -10,21 +11,36 @@
     padding: 8px;
     margin-bottom: 10px;
     border-radius: 8px;
+    background-color: rgb(233, 233, 233);
+    border: 1px solid #ccc;
+    align-self: flex-end; /* Align on the right */
+   
   }
+  
   
   .user {
     background-color: #e6f2ff;
     align-self: flex-start;
+    background-color: white;
   }
   
   .therapist {
-    background-color: #fff;
+    background-color: white;
     align-self: flex-end;
     border: 1px solid #ccc;
     align-items: flex-end; /* Add this line */
+
   }
   
   .message-text {
     margin: 0;
+    background-color: white;
+    word-wrap: break-word; /* Add this line */
   }
+  .message-undefined{
+    margin: 0;
+    background-color: white;
+    word-wrap: break-word; /* Add this line */
+  }
+  
   
