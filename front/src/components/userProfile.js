@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-function UserProfile({ id }) {
+function UserProfile() {
+  const { id } = useParams();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Fetch user data from the API
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`/api/get/id`); // Replace '1' with the actual user ID
+        const response = await axios.get(`http://localhost:5000/api/get/${id}`);
         setUser(response.data);
       } catch (error) {
         console.error(error);
@@ -27,9 +28,6 @@ function UserProfile({ id }) {
       <h2>User Profile</h2>
       <p>Name: {user.name}</p>
       <p>Email: {user.email}</p>
-      <p>Date of Birth: {user.date_of_birth}</p>
-      <p>Phone Number: {user.phone_number}</p>
-      <p>Address: {user.address}</p>
     </div>
   );
 }

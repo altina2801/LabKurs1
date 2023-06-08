@@ -1,5 +1,6 @@
+
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../css/register.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,19 +10,16 @@ function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(new URLSearchParams(formData));
-    console.log(data); // log the form data
-    
+    const data = Object.fromEntries(formData);
+
     try {
       const response = await axios.post('http://localhost:5000/api/register', data);
-      console.log(response.data); // log the response data for debugging
-      navigate('/userProfile');
+      const { insertId } = response.data;
+      navigate(`/userProfile/${insertId}`);
     } catch (error) {
-      console.error(error); // log any errors for debugging
+      console.error(error);
       toast.error('Failed to register. Please try again.');
     }
-  
-  
   };
   
 
@@ -48,3 +46,4 @@ function Register() {
 }
 
 export default Register;
+
