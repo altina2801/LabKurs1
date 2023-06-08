@@ -1,9 +1,6 @@
 const express=require("express");
 const app=express();
 const mysql=require("mysql");
-const socketIO = require('socket.io');
-const io = socketIO(server);
-const server = http.createServer(app);
 const bodyParser=require("body-parser");
 const cors=require("cors");
 const db=mysql.createPool({
@@ -33,7 +30,6 @@ app.get("/",(req,res)=>{
     // })
     
 });
-
 /*Add User */
 app.post("/api/post",(req,res)=>{
     const{name,email,password}=req.body;
@@ -61,16 +57,22 @@ app.delete("/api/remove/:id", (req, res) => {
     });
   });
   //Edit
-  app.get("/api/get/:id",(req,res)=>{
-    const{id}=req.params;
-    const sqlGet="SELECT * FROM contact_db WHERE id=?";
-    db.query(sqlGet,id,(error,result)=>{
-        if(error){
-            console.log(error);
-        }
-     res.send(result);
-    })
-})
+  app.get("/api/get/:id", (req, res) => {
+    const { id } = req.params;
+    const sqlGet = "SELECT * FROM contact_db WHERE id = ?";
+    
+    db.query(sqlGet, id, (error, result) => {
+      if (error) {
+        console.log(error);
+        res.status(500).json({ message: 'Failed to fetch user data' });
+      } else {
+        const userData = result[0]; // Assuming there's only one user with the given ID
+        res.status(200).json(userData);
+      }
+    });
+  });
+  
+
 //Update
 app.put("/api/update/:id", (req, res) => {
   const { id } = req.params;
@@ -87,31 +89,24 @@ app.put("/api/update/:id", (req, res) => {
   });
 });
 
+
 /*Me i insert te dhenat ne db prej register*/
 app.post('/api/register', (req, res) => {
   const { name, email, password } = req.body;
 
-  db.getConnection((err, connection) => {
-    if (err) {
-      console.log(err);
+  const sqlInsert = 'INSERT INTO contact_db (name, email, password) VALUES (?, ?, ?)';
+  db.query(sqlInsert, [name, email, password], (error, result) => {
+    if (error) {
+      console.log(error);
       res.status(500).json({ message: 'Failed to register user' });
     } else {
-      const sql = `INSERT INTO contact_db (name, email, password) VALUES (?, ?, ?)`;
-      const values = [name, email, password];
-
-      connection.query(sql, values, (err, result) => {
-        connection.release(); 
-        if (err) {
-          console.log(err);
-          res.status(500).json({ message: 'Failed to register user' });
-        } else {
-          console.log(result);
-          res.status(200).json({ message: 'User registered successfully' });
-        }
-      });
+      const insertId = result.insertId; // Retrieve the insertId from the result
+      res.status(200).json({ message: 'User registered successfully', insertId });
     }
   });
 });
+
+
   /*Deri qitu */
   /*Sessions */
 // Create a session
