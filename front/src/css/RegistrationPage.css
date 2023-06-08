@@ -53,22 +53,24 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:  antiquewhite;
+    background-color:  rgb(255, 237, 212);
     text-decoration: none;
   }
  
   
   .therapist-registration-button:hover,
   .user-registration-button:hover {
-    background-color: #e7e7e7;
+    background-color:  rgb(255, 237, 212);
     box-shadow:  0px 5px 5px 2px rgba(142, 142, 142, 0.5);
     transform: scale(1.05);
     transition: all 0.2s ease-in-out;
+    color: black;
   }
   
-  .registration-buttons a {
+  .registration-button span:hover {
     text-decoration: none;
-    background-color:  rgb(254, 250, 245);
+    background-color: #e7e7e7;
+   color: black;
   }
 
   

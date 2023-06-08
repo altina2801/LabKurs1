@@ -24,6 +24,7 @@ import Profile from './components/profile';
 import TherapistRegister from './components/TherapistRegister';
 import ChatBox from './components/chatbox';
 import UserProfile from './components/userProfile';
+import ProfileEdit from './components/profileedit';
 
 function App() {
   return (
@@ -54,7 +55,7 @@ function App() {
           <Route path="/therapistregister" element={<TherapistRegister />} />
           <Route path="/chatbox" element={<ChatBox />} />
           <Route path="/userProfile" element={<UserProfile />} />
-          
+          <Route path="/profileedit" element={<ProfileEdit />} />
           
         </Routes>
         <Footer />
