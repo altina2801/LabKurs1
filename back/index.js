@@ -6,7 +6,7 @@ const cors=require("cors");
 const db=mysql.createPool({
     host:"localhost",
     user:"root",
-    password:"",
+    password:"password",
     database:"crud_contact",
 });
 app.use(cors());
@@ -387,6 +387,59 @@ app.delete("/api/payments/:payment_id", (req, res) => {
     }
   });
 });
+// app.post('/login', (req, res) => {
+//   const { email, password } = req.body;
+
+//   const getUserQuery = `
+//   SELECT 'user' AS role, id, name, email, password
+//   FROM contact_db
+//   WHERE email = ? AND password = ?
+//   LIMIT 1
+  
+//   `;const getProfessionalQuery = `
+//   SELECT 'professional' AS role, professionals_id AS id, name, email, password
+// FROM professionals_db
+// WHERE email = ? AND password = ?
+// LIMIT 1
+// `;
+
+//   connection.query(getUserQuery, [email, password], (userError, userResults) => {
+//     if (userError) {
+//       res.status(500).send('Error');
+//     } else if (userResults.length > 0) {
+//       const user = userResults[0];
+//       const role = user.role;
+//       // Grant access to user functionality
+//       res.send('User authenticated');
+//     } else {
+//       connection.query(getProfessionalQuery, [email, password], (professionalError, professionalResults) => {
+//         if (professionalError) {
+//           res.status(500).send('Error');
+//         } else if (professionalResults.length > 0) {
+//           const professional = professionalResults[0];
+//           const role = professional.role;
+//           // Grant access to professional functionality
+//           res.send('Professional authenticated');
+//         } else {
+//           // Invalid credentials
+//           res.status(401).send('Invalid credentials');
+//       });
+//     }
+//   });
+// });
+
+app.post('/login',(req,res)=>{
+  const sql="SELECT * from contact_db WHERE email = ? AND password = ?";
+  db.query(sql,[req.body.email,req.body.password],(err,result)=>{
+    if(err) return res.json({Message:"Error inside server"});
+  if(result.length>0){
+    return res.json({Login:true})
+  }else{
+    return res.json({Login:false})
+  }
+  })
+})
+
 
 db.getConnection((err,connection)=>{
     if(err){
