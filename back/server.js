@@ -2,10 +2,40 @@ const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
 
-const app = express();
+
 const server = http.createServer(app);
 const io = socketIO(server);
 
+
+// Create an instance of the Express application
+const app = express();
+
+// Configure middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Database configuration
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'your_username',
+  password: 'your_password',
+  database: 'crud_contact',
+});
+
+// Register endpoint
+app.post('/register', (req, res) => {
+  // User registration code goes here
+  // ...
+
+  // Example response
+  res.status(200).json({ message: 'Registration successful' });
+});
+
+// Start the server
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
 // Socket.IO event listeners
 io.on('connection', (socket) => {
   console.log('A client has connected');

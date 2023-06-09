@@ -4,7 +4,7 @@ import MessageList from './MessageList';
 import MessageForm from './MessageForm';
 import '../css/Chatbox.css';
 
-const Chatbox = () => {
+const Chatbox = ({ currentUser, recipientUser }) => {
   const [messages, setMessages] = useState([]);
   const socketRef = useRef(null);
 
@@ -27,6 +27,8 @@ const Chatbox = () => {
     const message = {
       text,
       timestamp: new Date().getTime(),
+      sender: currentUser,
+      recipient: recipientUser,
     };
 
     // Send the message to the server
@@ -39,7 +41,7 @@ const Chatbox = () => {
   return (
     <div className="chatbox-container">
       <div className="chatbox-messages">
-        <MessageList messages={messages} />
+        <MessageList messages={messages} currentUser={currentUser} />
       </div>
       <div className="chatbox-form">
         <MessageForm onSendMessage={handleSendMessage} />

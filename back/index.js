@@ -20,6 +20,8 @@ app.get("/api/get",(req,res)=>{
      res.send(result);
     })
 })
+
+
 //Te qikjo mundemi psh si te shembulli me i dergu tedhena
 app.get("/",(req,res)=>{
     // const sqlInsert="INSERT INTO contact_db(name,email,password) VALUES ('tini','tini@gmail.com','tini123')";
