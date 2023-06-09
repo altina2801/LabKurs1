@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 const RegisterTherapist = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,7 +17,7 @@ const RegisterTherapist = () => {
   const [skills, setSkills] = useState('');
   const [specializations, setSpecializations] = useState('');
   const [description, setDescription] = useState('');
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -37,6 +40,8 @@ const RegisterTherapist = () => {
       await axios.post('/api/therapists', therapistData);
       // Handle successful registration, e.g., show a success message
       console.log('Therapist registered successfully');
+      //Navigate('./home');
+      navigate(`./home`);
     } catch (error) {
       // Handle registration error, e.g., display an error message
       console.error('Error registering therapist:', error);

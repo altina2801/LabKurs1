@@ -222,8 +222,6 @@ app.get("/api/therapists", (req, res) => {
   });
 });
 
-//Add
-
 app.post("/api/therapists", (req, res) => {
   const {
     name,
@@ -239,35 +237,46 @@ app.post("/api/therapists", (req, res) => {
     specializations,
     description,
   } = req.body;
-  
-  const sqlInsert =
+
+  const checkEmailQuery = "SELECT * FROM professionals_db WHERE email = ?";
+  const insertTherapistQuery =
     "INSERT INTO professionals_db (name, email, password, date_of_birth, gender, resume, certifications, profession_type, confirm_password, skills, specializations, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-  db.query(
-    sqlInsert,
-    [
-      name,
-      email,
-      password,
-      date_of_birth,
-      gender,
-      resume,
-      certifications,
-      profession_type,
-      confirm_password,
-      skills,
-      specializations,
-      description,
-    ],
-    (error, result) => {
-      if (error) {
-        console.log(error);
-        res.status(500).json({ message: "An error occurred while adding the therapist." });
-      } else {
+  db.query(checkEmailQuery, [email], (error, result) => {
+    if (error) {
+      console.log(error);
+      return res.status(500).json({ message: "An error occurred while checking the email." });
+    }
+
+    if (result.length > 0) {
+      return res.status(409).json({ message: "Email already exists." });
+    }
+
+    db.query(
+      insertTherapistQuery,
+      [
+        name,
+        email,
+        password,
+        date_of_birth,
+        gender,
+        resume,
+        certifications,
+        profession_type,
+        confirm_password,
+        skills,
+        specializations,
+        description,
+      ],
+      (error, result) => {
+        if (error) {
+          console.log(error);
+          return res.status(500).json({ message: "An error occurred while adding the therapist." });
+        }
         res.status(201).json({ message: "Therapist added successfully." });
       }
-    }
-  );
+    );
+  });
 });
 
 /* Delete therapist */
