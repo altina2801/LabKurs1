@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import '../css/Payments.css';
 
 const Payment = () => {
   const [payments, setPayments] = useState([]);
@@ -88,11 +87,11 @@ const Payment = () => {
   };
 
   return (
-    <div className="container">
+    <div>
       <h1>Payment Dashboard</h1>
 
       {showCreateForm ? (
-        <div className="form">
+        <div>
           <h2>Create Payment</h2>
           <form>
             <label>
@@ -147,14 +146,12 @@ const Payment = () => {
                 }
               />
             </label>
-            <button className="button" onClick={handleCreate}>Create</button>
+            <button onClick={handleCreate}>Create</button>
           </form>
         </div>
       ) : (
-        
         <div>
-          <button className="button" onClick={toggleCreateForm}>Create Payment</button>
-          <table className="table">
+          <table>
             <thead>
               <tr>
                 <th>Payment ID</th>
@@ -168,7 +165,6 @@ const Payment = () => {
               </tr>
             </thead>
             <tbody>
-            
               {payments.map((payment) => (
                 <tr key={payment.payment_id}>
                   <td>{payment.payment_id}</td>
@@ -179,24 +175,19 @@ const Payment = () => {
                   <td>{payment.payment_date}</td>
                   <td>{payment.payment_status}</td>
                   <td>
-                  <div className="button-container">
-                <button className="button delete-button" onClick={() => handleDelete(payment.payment_id)}>Delete</button>
-                    <button className="button edit-button" onClick={() => handleEdit(payment.payment_id)}>Edit</button>
-                     </div>
-                     </td>
-                     
-
-                  
+                    <button onClick={() => handleDelete(payment.payment_id)}>Delete</button>
+                    <button onClick={() => handleEdit(payment.payment_id)}>Edit</button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
-       
+          <button onClick={toggleCreateForm}>Create Payment</button>
         </div>
       )}
 
       {selectedPayment && (
-        <div className="form">
+        <div>
           <h2>Edit Payment</h2>
           <form>
             <label>
@@ -253,7 +244,7 @@ const Payment = () => {
                 }
               />
             </label>
-            <button className="button" onClick={handleUpdate}>Update</button>
+            <button onClick={handleUpdate}>Update</button>
           </form>
         </div>
       )}
