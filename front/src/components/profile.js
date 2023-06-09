@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import "../css/profile.css";
 
 const Profile = () => {
@@ -33,6 +33,10 @@ const Profile = () => {
       <p className="profile-info">Resume: {therapist.resume}</p>
       <p className="profile-info">Certifications: {therapist.certifications}</p>
       {/* Render additional information as needed */}
+      <Link to={`/profile/${professionals_id}/sessionForm?professionalId=${professionals_id}`}>
+  Book
+</Link>
+
     </div>
   );
 };
