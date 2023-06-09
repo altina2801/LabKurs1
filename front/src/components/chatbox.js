@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import io from 'socket.io-client';
 import MessageList from './MessageList';
 import MessageForm from './MessageForm';
-import '../css/Chatbox.css';
+import '../css/chatbox.css';
 
 const Chatbox = () => {
   const [messages, setMessages] = useState([]);

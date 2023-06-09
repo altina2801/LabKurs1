@@ -25,6 +25,7 @@ import TherapistRegister from './components/TherapistRegister';
 import ChatBox from './components/chatbox';
 import UserProfile from './components/userProfile';
 import ProfileEdit from './components/profileedit';
+import SessionForm from './components/sessionForm';
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/userProfile/:id" element={<UserProfile />}/>
+          <Route path="/userProfile/:id" element={<UserProfile />} />
           <Route path="/registerB" element={<RegisterB />} />
           <Route path="/addUser" element={<AddEdit />} />
           <Route path="/update/:id" element={<AddEdit />} />
@@ -53,12 +54,11 @@ function App() {
           <Route path="/sessionB" element={<SessionB />} />
           <Route path="/payment" element={<Payment />} />
           <Route path="/profile/:professionals_id" element={<Profile />} />
+          <Route path="/profile/:professionals_id/sessionForm" element={<SessionForm />} />
           <Route path="/therapistregister" element={<TherapistRegister />} />
           <Route path="/chatbox" element={<ChatBox />} />
           <Route path="/userProfile" element={<UserProfile />} />
           <Route path="/profileedit" element={<ProfileEdit />} />
-          
-          
         </Routes>
         <Footer />
       </Router>

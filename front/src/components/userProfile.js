@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import SessionForm from './sessionForm'; 
 
 function UserProfile() {
   const { id } = useParams();
@@ -28,6 +29,7 @@ function UserProfile() {
       <h2>User Profile</h2>
       <p>Name: {user.name}</p>
       <p>Email: {user.email}</p>
+      <SessionForm userId={user.id} /> {/* Pass the userId as a prop */}
     </div>
   );
 }
