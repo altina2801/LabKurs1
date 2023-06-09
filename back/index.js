@@ -427,17 +427,30 @@ app.delete("/api/payments/:payment_id", (req, res) => {
 //     }
 //   });
 // });
-
-app.post('/login',(req,res)=>{
+app.post('/user/login',(req,res)=>{
   const sql="SELECT * from contact_db WHERE email = ? AND password = ?";
   db.query(sql,[req.body.email,req.body.password],(err,result)=>{
     if(err) return res.json({Message:"Error inside server"});
-  if(result.length>0){
-    return res.json({Login:true})
-  }else{
-    return res.json({Login:false})
-  }
+    if(result.length>0){
+      return res.json({Login:true})
+    }else{
+      return res.json({Login:false})
+    }
   })
+})
+
+app.post('/professional/login', (req, res) => {
+  const sql = "SELECT * FROM professionals_db WHERE email = ? AND password = ?";
+  db.query(sql, [req.body.email, req.body.password], (err, result) => {
+    if (err) {
+      return res.json({ Message: "Error inside server" });
+    }
+    if (result.length > 0) {
+      return res.json({ Login: true });
+    } else {
+      return res.json({ Login: false });
+    }
+  });
 })
 
 

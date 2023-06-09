@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import '../css/login.css';
 import { useNavigate } from 'react-router-dom';
-
 import axios from 'axios';
 
 function Login() {
@@ -10,27 +9,28 @@ function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  
-  
   const handleSubmit = (e) => {
-    
-      e.preventDefault();
-      axios.post("http://localhost:3000/login", { email, password })
+    e.preventDefault();
 
-      .then(res=>{
-        if(res.data.Login){
+    // Check if the user is logging in as a user or therapist
+    const isUserLogin = e.target.name === 'userLogin';
+
+    // Define the appropriate endpoint URL based on the login type
+    const endpointURL = isUserLogin ? 'http://localhost:3000/user/login' : 'http://localhost:3000/user/login';
+
+
+    axios
+      .post(endpointURL, { email, password })
+      .then((res) => {
+        if (res.data.Login) {
           navigate('/');
-        }else{
-          alert("No record");
+        } else {
+          alert('No record');
         }
         console.log(res);
       })
-      .catch(err=>console.log(err));
-        
-
-      }
-     
-
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="login-container">
@@ -59,7 +59,12 @@ function Login() {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" name="userLogin">
+          User Login
+        </button>
+        <button type="submit" name="therapistLogin">
+          Therapist Login
+        </button>
       </form>
 
       <div className="tranquillo-picture">
@@ -70,4 +75,3 @@ function Login() {
 }
 
 export default Login;
-
