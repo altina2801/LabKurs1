@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import '../css/Professionals.css';
 
 const Professionals = () => {
   const [data, setData] = useState([]);
@@ -42,10 +43,10 @@ const Professionals = () => {
       <table className="styled-table">
         <thead>
           <tr>
-            <th style={{ textAlign: 'center' }}>No.</th>
-            <th style={{ textAlign: 'center' }}>Name</th>
-            <th style={{ textAlign: 'center' }}>Email</th>
-            <th style={{ textAlign: 'center' }}>Action</th>
+            <th className="text-center">No.</th>
+            <th className="text-center">Name</th>
+            <th className="text-center">Email</th>
+            <th className="text-center">Action</th>
           </tr>
         </thead>
         <tbody>
