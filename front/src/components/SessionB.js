@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import '../css/SessionB.css';
 
 const SessionB = () => {
   const [sessions, setSessions] = useState([]);
@@ -119,14 +120,14 @@ const SessionB = () => {
   );
 
   return (
-    <div style={{ marginTop: '100px' }}>
+    <div className="session-container">
       <div>
-        <h2>Sessions</h2>
-        <Link to="/sessions/create">
-          <button>Create Session</button>
+        <h2 className="session-title">Sessions</h2>
+        <Link to="/sessions/create" className="create-session-link">
+          <button className="create-session-button">Create Session</button>
         </Link>
 
-        <table>
+        <table className="session-table">
           <thead>
             <tr>
               <th>Professional ID</th>
@@ -148,8 +149,8 @@ const SessionB = () => {
                 <td>{session.session_notes}</td>
                 <td>{session.session_rating}</td>
                 <td>
-                  <button onClick={() => editSession(session.session_id)}>Edit</button>
-                  <button onClick={() => deleteSession(session.session_id)}>Delete</button>
+                  <button className="edit-session-button" onClick={() => editSession(session.session_id)}>Edit</button>
+                  <button className="delete-session-button" onClick={() => deleteSession(session.session_id)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -162,4 +163,3 @@ const SessionB = () => {
 };
 
 export default SessionB;
-

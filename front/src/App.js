@@ -26,6 +26,8 @@ import ChatBox from './components/chatbox';
 import UserProfile from './components/userProfile';
 import ProfileEdit from './components/profileedit';
 import SessionForm from './components/sessionForm';
+import AdminDashboard from './components/AdminDashboard';
+
 
 function App() {
   return (
@@ -59,6 +61,7 @@ function App() {
           <Route path="/chatbox" element={<ChatBox />} />
           <Route path="/userProfile" element={<UserProfile />} />
           <Route path="/profileedit" element={<ProfileEdit />} />
+          <Route path="/AdminDashboard" element={<AdminDashboard />} />
         </Routes>
         <Footer />
       </Router>

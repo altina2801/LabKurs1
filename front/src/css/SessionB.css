@@ -1,0 +1,122 @@
+.session-container {
+    margin-top: 100px;
+    background-color: white;
+  }
+  
+  .session-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: white;
+  }
+  
+  .session-title {
+    font-size: 24px;
+    background-color: white;
+  }
+  
+  .create-session-button {
+    background-color: #0080ff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .session-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .session-table th,
+  .session-table td {
+    padding: 10px;
+    border: 1px solid #d6d6d6;
+    background-color: rgba(255, 247, 232, 0.945);
+   
+  }
+  
+  
+  .session-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .session-actions button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .edit-session-button {
+    background-color: #ffd967;
+    color: #000;
+  }
+  
+  .session-edit-form {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f2f2f2;
+  }
+  
+  .session-edit-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .session-edit-form input {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  
+  .session-edit-form button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .session-title {
+    font-size: 34px;
+    margin-bottom: px;
+    color: #333;
+    text-align: center;
+    background-color: rgb(255, 237, 212);
+  }
+  
+  .create-session-link {
+    display: flex;
+    justify-content: center;
+    text-decoration: none;
+  }
+  
+  .create-session-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+  
+  .create-session-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .create-session-button:focus {
+    outline: none;
+  }
+  
+  /* Rest of the styles remain the same */
+  
