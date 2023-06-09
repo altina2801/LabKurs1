@@ -8,6 +8,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,12 +19,11 @@ function Login() {
     // Define the appropriate endpoint URL based on the login type
     const endpointURL = isUserLogin ? 'http://localhost:3000/user/login' : 'http://localhost:3000/user/login';
 
-
     axios
       .post(endpointURL, { email, password })
       .then((res) => {
         if (res.data.Login) {
-          navigate('/');
+          navigate('/', { state: { name: res.data.name } }); // Pass the name in the state object
         } else {
           alert('No record');
         }

@@ -3,15 +3,33 @@ const app=express();
 const mysql=require("mysql");
 const bodyParser=require("body-parser");
 const cors=require("cors");
+const session = require('express-session');
+
+const cookieParser =require('cookie-parser');
 const db=mysql.createPool({
     host:"localhost",
     user:"root",
     password:"password",
     database:"crud_contact",
 });
-app.use(cors());
+app.use(cors({
+  origin:["http://localhost:3000"],
+  methods:["POST","GET"],
+  credentials:true
+}));
 app.use(express.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cookieParser());
+app.use(session({
+  secret: 'secret', // a secret key used to encrypt the session cookie
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: false,
+    maxAge: 1000 * 60 * 60 * 24
+  } // set the session cookie properties
+}));
+
 /* Qikjo eshte krejt pjesa per me i shti te dhenat prej register*/
 //I merr te gjitha the dhenat qe i kena shti ne databaze dhe i qet dashboard
 app.get("/api/get",(req,res)=>{
@@ -23,7 +41,7 @@ app.get("/api/get",(req,res)=>{
 
 
 //Te qikjo mundemi psh si te shembulli me i dergu tedhena
-app.get("/",(req,res)=>{
+//app.get("/",(req,res)=>{
     // const sqlInsert="INSERT INTO contact_db(name,email,password) VALUES ('tini','tini@gmail.com','tini123')";
     // db.query(sqlInsert,(err,result)=>{
     //  console.log("error",err);
@@ -31,7 +49,7 @@ app.get("/",(req,res)=>{
     //  res.send("Hello Express");
     // })
     
-});
+//});
 /*Add User */
 app.post("/api/post",(req,res)=>{
     const{name,email,password}=req.body;
@@ -409,58 +427,31 @@ app.delete("/api/payments/:payment_id", (req, res) => {
     }
   });
 });
-// app.post('/login', (req, res) => {
-//   const { email, password } = req.body;
+//------------------------------Sessions & cookies
+app.get('/',(req,res)=>{
+  if(req.session.name){
+    return res.json({valid:true,username:req.session.name})
+    
+  }else{
+    return res.json({valid:false})
+  }
+})
 
-//   const getUserQuery = `
-//   SELECT 'user' AS role, id, name, email, password
-//   FROM contact_db
-//   WHERE email = ? AND password = ?
-//   LIMIT 1
-  
-//   `;const getProfessionalQuery = `
-//   SELECT 'professional' AS role, professionals_id AS id, name, email, password
-// FROM professionals_db
-// WHERE email = ? AND password = ?
-// LIMIT 1
-// `;
-
-//   connection.query(getUserQuery, [email, password], (userError, userResults) => {
-//     if (userError) {
-//       res.status(500).send('Error');
-//     } else if (userResults.length > 0) {
-//       const user = userResults[0];
-//       const role = user.role;
-//       // Grant access to user functionality
-//       res.send('User authenticated');
-//     } else {
-//       connection.query(getProfessionalQuery, [email, password], (professionalError, professionalResults) => {
-//         if (professionalError) {
-//           res.status(500).send('Error');
-//         } else if (professionalResults.length > 0) {
-//           const professional = professionalResults[0];
-//           const role = professional.role;
-//           // Grant access to professional functionality
-//           res.send('Professional authenticated');
-//         } else {
-//           // Invalid credentials
-//           res.status(401).send('Invalid credentials');
-//       });
-//     }
-//   });
-// });
-
-
+/*Qito kom mujt edhe direkt te add useri po nfillim sma ka rrok qaq e kom vazhdu qishtu */
 //added authentication to login functionality
 app.post('/user/login',(req,res)=>{
   const sql="SELECT * from contact_db WHERE email = ? AND password = ?";
   db.query(sql,[req.body.email,req.body.password],(err,result)=>{
     if(err) return res.json({Message:"Error inside server"});
     if(result.length>0){
+      req.session.name=result[0].name;
+     // console.log(req.session.name);
+
       return res.json({Login:true})
     }else{
       return res.json({Login:false})
     }
+    
   })
 })
 
@@ -478,20 +469,8 @@ app.post('/professional/login', (req, res) => {
   });
 })
 
-//added authentication to register functionality
-app.post('/user/signup', (req, res) => {
-  const sql = "INSERT INTO contact_db ('name','email','password') VALUES (?)"
-   const values =[
-    req.body.name,
-    req.body.email,
-    req.body.password
-   ]
-   db.query(sql,[values],(err,result)=>{
-    if(err)return res.json({Message:"Error in Node"});
 
-    return res.json(result);
-})
-  })
+
 db.getConnection((err,connection)=>{
     if(err){
         console.error("Error connecting to MYSQL server:",err);
