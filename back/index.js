@@ -209,16 +209,42 @@ app.get("/api/therapists", (req, res) => {
   });
 });
 
-/* Add therapist */
+//Add
+
 app.post("/api/therapists", (req, res) => {
-  const { name, email, password, date_of_birth, gender, resume, certifications, profession_type, image, confirm_password, skills, specializations, cv, about, description
-   } = req.body;
+  const {
+    name,
+    email,
+    password,
+    date_of_birth,
+    gender,
+    resume,
+    certifications,
+    profession_type,
+    confirm_password,
+    skills,
+    specializations,
+    description,
+  } = req.body;
+  
   const sqlInsert =
-    "INSERT INTO professionals_db (name, email, password, date_of_birth, gender, resume, certifications, profession_type, image, confirm_password, skills, specializations, cv, about, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    "INSERT INTO professionals_db (name, email, password, date_of_birth, gender, resume, certifications, profession_type, confirm_password, skills, specializations, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
   db.query(
     sqlInsert,
-    [name, email, password, date_of_birth, gender, resume, certifications, profession_type, image, confirm_password, skills, specializations, cv, about, description
+    [
+      name,
+      email,
+      password,
+      date_of_birth,
+      gender,
+      resume,
+      certifications,
+      profession_type,
+      confirm_password,
+      skills,
+      specializations,
+      description,
     ],
     (error, result) => {
       if (error) {

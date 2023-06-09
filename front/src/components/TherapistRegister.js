@@ -1,155 +1,124 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
-import "../css/TherapistRegister.css";
 
-const TherapistRegister = () => {
-  const navigate = useNavigate();
+const RegisterTherapist = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [confirm_password, setConfirm_password] = useState('');
+  const [date_of_birth, setDate_of_birth] = useState('');
   const [gender, setGender] = useState('');
   const [resume, setResume] = useState('');
   const [certifications, setCertifications] = useState('');
-  const [professionType, setProfessionType] = useState('');
-  const [image, setImage] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [profession_type, setProfession_type] = useState('');
   const [skills, setSkills] = useState('');
   const [specializations, setSpecializations] = useState('');
-  const [cv, setCV] = useState('');
-  const [about, setAbout] = useState('');
   const [description, setDescription] = useState('');
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted');
-    // Rest of the code
 
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('date_of_birth', dateOfBirth);
-    formData.append('gender', gender);
-    formData.append('resume', resume);
-    formData.append('certifications', certifications);
-    formData.append('profession_type', professionType);
-    formData.append('image', image);
-    formData.append('confirm_password', confirmPassword);
-    formData.append('skills', skills);
-    formData.append('specializations', specializations);
-    formData.append('cv', cv);
-    formData.append('about', about);
-    formData.append('description', description);
+    const therapistData = {
+      name,
+      email,
+      password,
+      confirm_password,
+      date_of_birth,
+      gender,
+      resume,
+      certifications,
+      profession_type,
+      skills,
+      specializations,
+      description,
+    };
 
-    // Send the form data to the server
     try {
-      const response = await axios.post('http://localhost:5000/api/therapists', formData);
-      console.log(response.data); // Log the response data for debugging
-      toast.success('You created your profile successfully.');
-      navigate('/'); // Navigate to a different route upon successful registration
+      await axios.post('/api/therapists', therapistData);
+      // Handle successful registration, e.g., show a success message
+      console.log('Therapist registered successfully');
     } catch (error) {
-      console.error(error); // Log any errors for debugging
-      toast.error('Failed to register therapist. Please try again.');
+      // Handle registration error, e.g., display an error message
+      console.error('Error registering therapist:', error);
     }
   };
 
   return (
-    <div className="register-container">
+    <div>
+      <h2>Register Therapist</h2>
       <form onSubmit={handleSubmit}>
-        <h2 className="the-register-name">Register</h2>
-        <div className="input-row">
-          <div className="input-field">
-            <i className="fa fa-user"></i>
-            <input type="text" placeholder="First and last name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
-          </div>
-          <div className="input-field">
-            <i className="fa fa-envelope"></i>
-            <input type="email" placeholder="Email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          </div>
-          <div className="input-field">
-            <i className="fa fa-lock"></i>
-            <input type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-          </div>
-        </div>
-        <div className="input-row">
-        <div className="input-field">
-            <i className="fa fa-lock"></i>
-            <input type="password" placeholder="Confirm Password" name="confirm_password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-          </div>
-          <div className="input-field">
-            <i className="fa fa-calendar"></i>
-            <input type="date" placeholder="Date of Birth" name="date_of_birth" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required />
-          </div>
-          <div className="input-field">
-            <i className="fa fa-venus-mars"></i>
-            <select name="gender" value={gender} onChange={(e) => setGender(e.target.value)} required>
-              <option value="">Select Gender</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-        </div>
-        <div className="input-row">
-          <div className="input-field">
-            <i className="fa fa-file"></i>
-            <textarea placeholder="Resume" name="resume" value={resume} onChange={(e) => setResume(e.target.value)} required></textarea>
-          </div>
-          <div className="input-field">
-            <i className="fa fa-certificate"></i>
-            <textarea placeholder="Certifications" name="certifications" value={certifications} onChange={(e) => setCertifications(e.target.value)} required></textarea>
-          </div>
-        </div>
-        <div className="input-row">
-          <div className="input-field">
-            <i className="fa fa-users"></i>
-            <select name="profession_type" value={professionType} onChange={(e) => setProfessionType(e.target.value)} required>
-              <option value="">Select Profession Type</option>
-              <option value="therapist">Therapist</option>
-              <option value="psychologist">Psychologist</option>
-            </select>
-          </div>
-        
-        </div>
-        <div className="input-row">
-          <div className="input-field">
-            <i className="fa fa-check"></i>
-            <input type="text" placeholder="Skills" name="skills" value={skills} onChange={(e) => setSkills(e.target.value)} required />
-          </div>
-        </div>
-        <div className="input-row">
-          <div className="input-field">
-            <i className="fa fa-check"></i>
-            <input type="text" placeholder="Specializations" name="specializations" value={specializations} onChange={(e) => setSpecializations(e.target.value)} required />
-          </div>
-          <div className="input-field">
-          <div className="input-field">
-            <i className="fa fa-image"></i>
-            <input type="file" accept="image/*" name="image" onChange={handleImageChange} required />
-          </div>
-          
-          </div>
-        </div>
-        <div className="input-row">
-          <div className="input-field">
-            <i className="fa fa-info-circle"></i>
-            <textarea placeholder="About" name="about" value={about} onChange={(e) => setAbout(e.target.value)} required></textarea>
-          </div>
-         
-        </div>
+        <label>
+          Name:
+          <input type="text" value={name} name="name"onChange={(e) => setName(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Email:
+          <input type="email" value={email} name="email" onChange={(e) => setEmail(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input type="password" value={password} name="password"onChange={(e) => setPassword(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Confirm Password:
+          <input type="password" value={confirm_password}name="confirm_password" onChange={(e) => setConfirm_password(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Date of Birth:
+          <input type="date" value={date_of_birth} name="date_of_birth" onChange={(e) => setDate_of_birth(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Gender:
+          <select value={gender} name="gender"onChange={(e) => setGender(e.target.value)}>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Resume:
+          <textarea value={resume}name="resume" onChange={(e) => setResume(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Certifications:
+          <textarea value={certifications} name="certifications"onChange={(e) => setCertifications(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Profession Type:
+          <select value={profession_type}name="profession_type" onChange={(e) => setProfession_type(e.target.value)}>
+          <option value="other">Other</option>
+            <option value="therapist">Therapist</option>
+            <option value="psychologist">Psychologist</option>
+          </select>
+        </label>
+        <br />
+        <label>
+          Skills:
+          <input type="text" value={skills} name="skills"onChange={(e) => setSkills(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Specializations:
+          <input type="text" value={specializations}name="specializations" onChange={(e) => setSpecializations(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Description:
+          <textarea value={description} name="description"onChange={(e) => setDescription(e.target.value)} />
+        </label>
+        <br />
         <button type="submit">Register</button>
       </form>
     </div>
   );
 };
 
-export default TherapistRegister;
+export default RegisterTherapist;
