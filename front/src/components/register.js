@@ -1,12 +1,12 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Register() {
   const navigate = useNavigate();
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -21,10 +21,10 @@ function Register() {
       toast.error('Failed to register. Please try again.');
     }
   };
-  
 
   return (
     <div className="register-container">
+      <ToastContainer />
       <form onSubmit={handleSubmit}>
         <h2 className="the-register-name">Register</h2>
         <div className="input-field">
@@ -46,4 +46,3 @@ function Register() {
 }
 
 export default Register;
-

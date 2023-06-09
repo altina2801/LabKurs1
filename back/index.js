@@ -95,18 +95,31 @@ app.put("/api/update/:id", (req, res) => {
 /*Me i insert te dhenat ne db prej register*/
 app.post('/api/register', (req, res) => {
   const { name, email, password } = req.body;
-
-  const sqlInsert = 'INSERT INTO contact_db (name, email, password) VALUES (?, ?, ?)';
-  db.query(sqlInsert, [name, email, password], (error, result) => {
-    if (error) {
-      console.log(error);
-      res.status(500).json({ message: 'Failed to register user' });
-    } else {
-      const insertId = result.insertId; // Retrieve the insertId from the result
-      res.status(200).json({ message: 'User registered successfully', insertId });
+  const sql = "SELECT * FROM contact_db WHERE email = ?";
+  
+  db.query(sql, [email], (err, result) => {
+    if (err) {
+      return res.json({ Message: "Error inside server" });
     }
+
+    if (result.length > 0) {
+      return res.json({ Message: "Email already exists" });
+    }
+    
+    // If the email doesn't exist, proceed with user registration
+    const sqlInsert = 'INSERT INTO contact_db (name, email, password) VALUES (?, ?, ?)';
+    db.query(sqlInsert, [name, email, password], (error, result) => {
+      if (error) {
+        console.log(error);
+        return res.status(500).json({ message: 'Failed to register user' });
+      } else {
+        const insertId = result.insertId; // Retrieve the insertId from the result
+        return res.status(200).json({ message: 'User registered successfully', insertId });
+      }
+    });
   });
 });
+
 
 
   /*Deri qitu */
@@ -427,6 +440,9 @@ app.delete("/api/payments/:payment_id", (req, res) => {
 //     }
 //   });
 // });
+
+
+//added authentication to login functionality
 app.post('/user/login',(req,res)=>{
   const sql="SELECT * from contact_db WHERE email = ? AND password = ?";
   db.query(sql,[req.body.email,req.body.password],(err,result)=>{
@@ -453,7 +469,20 @@ app.post('/professional/login', (req, res) => {
   });
 })
 
+//added authentication to register functionality
+app.post('/user/signup', (req, res) => {
+  const sql = "INSERT INTO contact_db ('name','email','password') VALUES (?)"
+   const values =[
+    req.body.name,
+    req.body.email,
+    req.body.password
+   ]
+   db.query(sql,[values],(err,result)=>{
+    if(err)return res.json({Message:"Error in Node"});
 
+    return res.json(result);
+})
+  })
 db.getConnection((err,connection)=>{
     if(err){
         console.error("Error connecting to MYSQL server:",err);
