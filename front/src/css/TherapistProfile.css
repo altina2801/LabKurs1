@@ -1,0 +1,99 @@
+/* Common styles for all profiles */
+.profile-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-heading {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-info {
+    margin-bottom: 5px;
+  }
+  
+  /* Styles specific to the profile with professionals_id 1 */
+  .profile-container.profile-1 {
+    background-color: #fff;
+    border: 1px solid #ddd;
+  }
+  
+  .profile-container.profile-1 .profile-heading {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 10px;
+    background-color: white; 
+ }
+  
+  .profile-container.profile-1 .profile-info {
+    color: #555;
+    background-color: white;
+    margin-bottom: 5px;
+  }
+  
+  
+  .profile-container.profile-1 a {
+    display: inline-block;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .profile-container.profile-1 a:hover {
+    background-color: #0056b3;
+  }
+  
+  .profile-container.profile-1 a:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .profile-container.profile-1 .book-link {
+    display: inline-block;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+   
+    transition: background-color 0.3s ease;
+  }
+  
+  .profile-container.profile-1 .book-link:hover {
+    background-color: #0056b3;
+  }
+  
+  .profile-container.profile-1 .book-link:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  .profile-container.profile-1 .book-link label {
+    background-color: #fff;
+  }
+  .profile-container.profile-1 form label {
+    background-color: white;
+  }  
+label{
+    background-color: rgb(255, 255, 255);
+}
+
+form textarea {
+    background-color: white;
+    width: 290px;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  

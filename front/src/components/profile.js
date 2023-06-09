@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import "../css/profile.css";
+import "../css/TherapistProfile.css";
 
 const Profile = () => {
   const { professionals_id } = useParams();
@@ -25,7 +25,7 @@ const Profile = () => {
   }
 
   return (
-    <div className="profile-container">
+    <div className={`profile-container profile-${professionals_id}`}>
       <h2 className="profile-heading">{therapist.name}'s Profile</h2>
       <p className="profile-info">Email: {therapist.email}</p>
       <p className="profile-info">Date of Birth: {therapist.date_of_birth}</p>
@@ -33,10 +33,9 @@ const Profile = () => {
       <p className="profile-info">Resume: {therapist.resume}</p>
       <p className="profile-info">Certifications: {therapist.certifications}</p>
       {/* Render additional information as needed */}
-      <Link to={`/profile/${professionals_id}/sessionForm?professionalId=${professionals_id}`}>
+      <Link to={`/profile/${professionals_id}/sessionForm?professionalId=${professionals_id}`} className="book-link">
   Book
 </Link>
-
     </div>
   );
 };
